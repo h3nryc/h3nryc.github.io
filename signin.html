@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/my-app.css">
+  </head>
+  <body>
+    <img class='logo'style="height: 100px; width: 100px;" src='./logo.png' />
+    <div class='login cf'>
+
+
+      <input type='text' id="first" placeholder='First Name' autofocus />
+      <input type='text' id="email" placeholder='Email' autofocus />
+      <input type='text' id="username" placeholder='Username' autofocus />
+      <input type='password' id="password" placeholder='Password' />
+
+
+      <div class='signup-link flo-l clr-l'>
+        <p class='big'>Duh. I have an account</p>
+        <a class='big' onclick="window.location.replace('./login.html');">Sign In</a>
+      </div>
+
+      <input class='flo-r' onclick="createUser()" type='submit' value='Sign Up' />
+
+    </div>
+
+    <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+  </body>

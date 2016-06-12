@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="css/framework7.ios.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+      <!-- <link href="css/framework7.material.css" rel="stylesheet">
+      <link href="css/framework7.material.colors.css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/my-app.css">
+  </head>
+  <body>
+    <div class="statusbar-overlay"></div>
+    <div class="prog-bar">
+
+    </div>
+    <!-- Side Panel -->
+    <div class="panel panel-right panel-cover">
+    <div id="profile-card-info" class="content-block">
+      <!-- Click on link with "close-panel" class will close panel -->
+      <p><a href="#" class="close-panel"><i class="material-icons">arrow_back</i></a></p>
+      <!-- Click on link with "open-panel" and data-panel="left" attribute will open Left panel -->
+      <p><a href="#" onclick="logout();" data-panel="left" class="open-panel">Logout</a></p>
+    </div>
+    </div>
+    <!-- Popover /// Post -->
+    <div class="popup popup-post">
+      <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="close-popup link" id="close-popup">Close</a>
+            </div>
+            <div class="center">New Post</div>
+            <div class="right">
+              <a href="#" class="close-popup link" onclick="post()"id="close-popup">Done</a>
+            </div>
+        </div>
+      </div>
+      <div class="content-block" id="top-small">
+        <textarea class="post-box" id="post-text" placeholder="Tell your friends whats up!"></textarea>
+        <div class="post-right">
+          <div class="post-pic">
+            <ul>
+              <li>
+                <input id="imagePost"  class="inputfile" type="file" accept="image/*;capture=camera/*" name="filename"/>
+                <label for="imagePost" ><i class="material-icons">photo_camera</i></label>
+              </li>
+              <li><i class="material-icons">account_circle</i></li>
+              <li><i class="material-icons">room</i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Popover /// Post -->
+    <div class="views">
+     <!-- Your main view, should have "view-main" class -->
+     <div class="view view-main">
+       <div class="views tabs toolbar-fixed">
+         <!-- Tab 1 - View 1, active by default -->
+         <div id="tab1" class="view tab active">
+           <div class="navbar" id="mainnav">
+             <div class="navbar-inner">
+               <div class="center"><span class="logo" >Swift.ly</span></div>
+             </div>
+           </div>
+           <div class="pages navbar-fixed ">
+             <div data-page="home-1" class="page">
+               <div class="page-content pull-to-refresh-content infinite-scroll" data-ptr-distance="55">
+                 <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                 <div id="view1-content"class="content-block">
+                   <div class="result">
+                     <ul id="search-ul">
+                     </ul>
+                   </div>
+              </div>
+                  <a href="#" data-popup=".popup-post" class="open-popup">
+                   <div class="postbox-link">
+                     <h3 class="postbox-tag">What's Happening?</h3>
+                   </div>
+                 </a>
+
+                   <div class="posts">
+                   </div>
+
+                 <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <!-- Tab 2 - View 2 -->
+         <div id="tab2" class="view tab">
+           <div class="navbar">
+             <div class="navbar-inner">
+               <div class="center">Activity</div>
+             </div>
+           </div>
+           <div class="pages navbar-fixed">
+             <div data-page="home-2" class="page">
+               <div class="page-content">
+                   <div id="notif-div" class="list-block media-list">
+                     <ul id="notifList">
+                     </ul>
+                   </div>
+                   <a href="#" id="small-but" onclick="getNotif();" class="button button-big">More</a>
+               </div>
+             </div>
+           </div>
+         </div>
+         <!-- Tab 2 - View 3 -->
+         <div id="tab3" class="view tab">
+           <div class="navbar">
+             <div class="navbar-inner">
+               <div class="center">View 3</div>
+             </div>
+           </div>
+           <div class="pages navbar-fixed">
+             <div data-page="home-3" class="page">
+               <div class="page-content">
+               <div class="profile-coverphoto">
+                 <img src="http://back-swiftlyback.rhcloud.com/uploads/cover-henry.jpg" alt="" />
+               </div>
+               <div class="profile-photo">
+                 <img class="changepic" src="http://back-swiftlyback.rhcloud.com/uploads/henry.jpg" alt="" />
+               </div>
+               <div class="page-content">
+               </div>
+             </div>
+           </div>
+         </div>
+     </div>
+       <!-- Bottom Toolbar-->
+       <div class="toolbar tabbar" id="top">
+         <div class="toolbar-inner">
+           <a href="#" class="tab-link"><img class="logo" src="./logo.png" alt=""></a>
+           <a href="#tab1" class="tab-link active"><i class="material-icons md-light">rss_feed</i></a>
+           <a href="#tab2" onclick="loadNotif();" class="tab-link"><i class="material-icons md-light">thumb_up</i></a>
+           <a href="#tab3" class="tab-link"><i class="material-icons md-light">person_pin</i></a>
+           <a href="#tab4" data-panel="right" class="open-panel material-icons md-light tab-link">menu</i></a>
+         </div>
+       </div>
+      <!-- Search box -->
+      <div class="searchbox-out">
+        <div class="searchbox-inner">
+          <input class="searchbox-input" id="search-input" placeholder="&#xE8B6; Search for anything..." maxlength="45" style="font-family: sans-serif, Material Icons" />
+        </div>
+      </div>
+    <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>

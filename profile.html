@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/my-app.css">
+  </head>
+  <body>
+      <div style="background-color: rgba(235, 235, 241, 0.5);">
+        <div class="close-but close-popup">
+          <i class="material-icons">close</i></div>
+          <div class="profilebox"> <div class="profileimage">
+             <h1 style="text-align: center;">@'+user+'</h1> <img src="http://back-swiftlyback.rhcloud.com/uploads/cover-'+user+'.jpg" alt="Federico Espinosa"> </div>
+             <div class="followbutton"> <a class="btn-floating btn-large waves-effect waves-light invipink right"> <i class="material-icons black-text">person_add</i> </a> </div>
+             <div class="profiletitlelocation">Web / UI / UX Designer - Front End Developer Montreal, Quebec, Canada</div> </div>
+             <div style="margin-top: 40px;"class="userPosts"> </div><div id="more-but"><a href="#" id="small-but" onclick="getUserPosts()" class="button button-big">More</a>
+             </div>
+           </div>
+         </div> <!-- Close .mainbox --> </div>
+    <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
