@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>My App</title>
+    <title>Week.ly</title>
     <link rel="stylesheet" href="css/framework7.ios.css">
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
       <!-- <link href="css/framework7.material.css" rel="stylesheet">
@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/my-app.css">
   </head>
-  <body>
+  <body class="close-panel">
     <div class="statusbar-overlay"></div>
     <div class="prog-bar">
 
@@ -126,14 +126,14 @@
            <div class="pages navbar-fixed">
              <div data-page="home-3" class="page">
                <div class="page-content">
-               <div class="profile-coverphoto">
-                 <img src="http://back-swiftlyback.rhcloud.com/uploads/cover-henry.jpg" alt="" />
+               <div class="profile-coverphoto changepic">
                </div>
-               <div class="profile-photo">
-                 <img class="changepic" src="http://back-swiftlyback.rhcloud.com/uploads/henry.jpg" alt="" />
+               <div class="profile-photo changepic">
                </div>
-               <div class="page-content">
+               <div style="position: relative; bottom: 80px;"class="profile-posts">
+
                </div>
+               <a href="#" id="small-but" onclick="getProfilePosts();" class="button button-big">More</a>
              </div>
            </div>
          </div>
@@ -144,7 +144,7 @@
            <a href="#" class="tab-link"><img class="logo" src="./logo.png" alt=""></a>
            <a href="#tab1" class="tab-link active"><i class="material-icons md-light">rss_feed</i></a>
            <a href="#tab2" onclick="loadNotif();" class="tab-link"><i class="material-icons md-light">thumb_up</i></a>
-           <a href="#tab3" class="tab-link"><i class="material-icons md-light">person_pin</i></a>
+           <a href="#tab3" onclick="loadProfile();"class="tab-link"><i class="material-icons md-light">person_pin</i></a>
            <a href="#tab4" data-panel="right" class="open-panel material-icons md-light tab-link">menu</i></a>
          </div>
        </div>

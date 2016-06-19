@@ -4,6 +4,7 @@ var $$ = Dom7;
 var ptrContent = $$('.pull-to-refresh-content');
 var skip = 0;
 var notifSkip = 0;
+var profileSkip = 0;
 var loading = false;
 var userSkip = 0;
 var storage = window.localStorage;
@@ -20,7 +21,12 @@ function check() {
     window.location.replace("./login.html");
   }
 }
-
+socket.emit('Get Username', storage.getItem("logUser"))
+socket.on('Return Username', function(user){
+  $('#profile-card-info').append('<p> Your logged in as @'+user+'</p>')
+  $('.profile-photo').append('<img class="changepic" src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" alt="" />')
+  $('.profile-coverphoto').append('<img src="http://back-swiftlyback.rhcloud.com/uploads/cover-'+user+'.jpg" alt="" />')
+})
 var mainView = myApp.addView('.view-main', {
   dynamicNavbar: true
 });
@@ -31,8 +37,6 @@ function getPost() {
   socket.emit('Get Feed Posts', storage.getItem("logUser"), skip)
   skip = skip+12;
 }
-
-$('#profile-card-info').append('<p> Your logged in as @'+storage.getItem("logUser")+'</p>')
 
 socket.on('Send Post', function(post){
   for (var i = 0; i < post.length; i++) {
@@ -46,6 +50,7 @@ socket.on('Send Post', function(post){
 //Action Sheets
 
 $$('.changepic').on('click', function () {
+  console.log("hey");
     var buttons = [
         {
             text: 'Change Cover Photo',
@@ -73,7 +78,7 @@ $$('.changepic').on('click', function () {
             text: 'Cancel',
             color: 'red',
             onClick: function () {
-                myApp.alert('Cancel clicked');
+
             }
         },
     ];
@@ -96,11 +101,11 @@ ptrContent.on('refresh', function (e) {
 //All Functions
 
 function displayTextPost(loc,user,text,time,like,id) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p class="link">'+like+' Likes</p> </div> </div>')
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 
 function displayImagePost(loc,user,text,time,like,id, ext) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://back-swiftlyback.rhcloud.com/uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p class="link">'+like+' Likes</p> </div> </div>')
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://back-swiftlyback.rhcloud.com/uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
@@ -118,7 +123,13 @@ function timeConverter(UNIX_timestamp){
 function like(user, id) {
   var cuser = storage.getItem("logUser");
     socket.emit("Like Post", user, id, cuser)
+    socket.emit('Get Like Count', id)
 }
+
+socket.on('Return Like Count', function(count,id){
+  document.getElementById(id).innerHTML = count+' Likes';
+})
+
 
 function post() {
   var postText = document.getElementById("post-text").value;
@@ -133,6 +144,7 @@ function post() {
         , time: time
         , like: 0
         , image: "no"
+        , score: 1
     }
           socket.emit('Post', postData);
 
@@ -150,7 +162,6 @@ function navUser(user) {
                   var html = '<div style="background-color: rgba(235, 235, 241, 0.5);" class="popup popup-user navbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"><div class="close-but close-popup"><i class="material-icons">close</i></div></div><div class="center"><p>@'+user+'</p></div> <div id="unfollow" class="right"></div></div> </div><div style="margin-top: 40px;"class="userPosts"> </div><div id="more-but"><a href="#" id="small-but" onclick="getUserPosts()" class="button button-big">More</a></div></div> </div> <!-- Close .mainbox --> </div>'
   myApp.popup(html);
   socket.emit('Check Follow', storage.getItem("logUser"), user);
-  socket.emit('Get Bio', user);
 }
 
 socket.on('Send User Post', function(post){
@@ -182,6 +193,7 @@ function getUserPosts(user) {
     socket.emit('Get Profile Posts', user, userSkip);
     userSkip = userSkip+4
   }
+  $('#unfollow').empty();
   $('#unfollow').append('<p onclick="unfollowUser('+"'"+user+"'"+');" style="color: red; font-weight: 500;">Unfollow</p>')
 }
 
@@ -254,6 +266,7 @@ function uploadPostImage(file, location, postText, user, time) {
         , like: 0
         , image: "yes"
         , ext: ext
+        , score: 1
     }
 	socket.emit('Image Post', ext, buffer, location, postData, { image: true, buffer: buffer });
   $('.prog-bar').append('<div style="height: 30px;" class="progressbar-infinite"></div>')
@@ -275,17 +288,17 @@ function loadNotif() {
   $('#notifList').empty();
   notifSkip = 0;
   socket.emit('Get Notif', storage.getItem("logUser"), notifSkip);
-  notifSkip = notifSkip+3;
+  notifSkip = notifSkip+8;
 }
 
 function getNotif() {
   socket.emit('Get Notif', storage.getItem("logUser"), notifSkip);
-  notifSkip = notifSkip+3;
+  notifSkip = notifSkip+8;
 }
 
 socket.on('Send Notif', function(docs){
   for (var i = 0; i < docs.length; i++) {
-    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div class="item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
+    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs[i].user+"'"+');" class="color-blue item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
   }
 })
 
@@ -310,9 +323,30 @@ function logout() {
 }
 
 socket.on('Post Done', function(docs){
-            console.log("yo");
  $('.prog-bar').empty();
  $('.posts').empty();
  skip = 0;
  getPost()
 })
+
+function loadProfile() {
+  $('.profile-posts').empty();
+  profileSkip = 0;
+  socket.emit('Get User Posts', storage.getItem("logUser"), profileSkip);
+  profileSkip = profileSkip+5;
+}
+
+socket.on('Send Profile Post', function(post){
+  for (var i = 0; i < post.length; i++) {
+    if (post[i].image === "no" || post[i].image === undefined) {
+        displayTextPost(".profile-posts",post[i].user, post[i].text, post[i].time, post[i].like, post[i]._id);
+    }else{
+      displayImagePost(".profile-posts", post[i].user, post[i].text, post[i].time, post[i].like, post[i]._id, post[i].ext);
+    }
+  }
+});
+
+function getProfilePosts() {
+  socket.emit('Get User Posts', storage.getItem("logUser"), profileSkip);
+  notifSkip = notifSkip+5;
+}
