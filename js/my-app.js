@@ -1,5 +1,5 @@
 var myApp = new Framework7();
-var socket = io('http://back-swiftlyback.rhcloud.com');
+var socket = io('http://localhost:8080');
 var $$ = Dom7;
 var ptrContent = $$('.pull-to-refresh-content');
 var skip = 0;
@@ -24,8 +24,8 @@ function check() {
 socket.emit('Get Username', storage.getItem("logUser"))
 socket.on('Return Username', function(user){
   $('#profile-card-info').append('<p> Your logged in as @'+user+'</p>')
-  $('.profile-photo').append('<img class="changepic" src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" alt="" />')
-  $('.profile-coverphoto').append('<img src="http://back-swiftlyback.rhcloud.com/uploads/cover-'+user+'.jpg" alt="" />')
+  $('.profile-photo').append('<img class="changepic" src="http://localhost:8080/uploads/'+user+'.jpg" alt="" />')
+  $('.profile-coverphoto').append('<img src="http://localhost:8080/uploads/cover-'+user+'.jpg" alt="" />')
 })
 var mainView = myApp.addView('.view-main', {
   dynamicNavbar: true
@@ -101,11 +101,11 @@ ptrContent.on('refresh', function (e) {
 //All Functions
 
 function displayTextPost(loc,user,text,time,like,id) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://localhost:8080/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 
 function displayImagePost(loc,user,text,time,like,id, ext) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://back-swiftlyback.rhcloud.com/uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://localhost:8080/uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://localhost:8080/uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
@@ -249,6 +249,10 @@ function uploadCoverImage(file, location) {
 	reader.readAsBinaryString(file);
 }
 
+function hexToBase64(str) {
+    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+}
+
 
 function uploadPostImage(file, location, postText, user, time) {
 	//Reads file content as binary and sends to server
@@ -298,7 +302,7 @@ function getNotif() {
 
 socket.on('Send Notif', function(docs){
   for (var i = 0; i < docs.length; i++) {
-    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs[i].user+"'"+');" class="color-blue item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
+    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://localhost:8080/uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs[i].user+"'"+');" id="bold" class="item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
   }
 })
 
@@ -313,7 +317,8 @@ $('#search-input').keyup(function(event) {
 
 socket.on('Search Result', function(docs){
   $('#search-ul').empty();
-  $$('#search-ul').append('<li> <a onclick="navUser('+"'"+docs+"'"+');" href="#"> <div class="search-div"> <div class="search-pic"> <img src="http://back-swiftlyback.rhcloud.com/uploads/'+docs+'.jpg" alt=""> </div> <h3>@'+docs+'</h3></div> </a> </li>')
+  // $$('#search-ul').append('<li> <a onclick="navUser('+"'"+docs+"'"+');" href="#"> <div class="search-div"> <div class="search-pic"> <img src="http://localhost:8080/uploads/'+docs+'.jpg" alt=""> </div> <h3>@'+docs+'</h3></div> </a> </li>')
+    $$('#search-ul').append('<li> <div id="no-border" class=" search-div item-content"> <div class="item-media"><img src="http://localhost:8080/uploads/'+docs+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs+"'"+');" id="bold" class="item-title">'+docs+'</div> </div> <div class="item-subtitle"></div> </div> </div> </li>')
 })
 
 function logout() {
@@ -348,5 +353,5 @@ socket.on('Send Profile Post', function(post){
 
 function getProfilePosts() {
   socket.emit('Get User Posts', storage.getItem("logUser"), profileSkip);
-  notifSkip = notifSkip+5;
+  profileSkip = profileSkip+5;
 }

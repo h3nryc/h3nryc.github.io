@@ -536,6 +536,10 @@ label{
   margin-bottom: 10px;
 }
 
+#left{
+  float: left;
+}
+
 .close-but{
   z-index: 100;
 }
@@ -609,4 +613,23 @@ label{
   height: 30px;
   margin: 0;
   padding: 0;
+}
+
+#bold{
+  font-weight: 500;
+  font-size: 13pt;
+  color: grey;
+}
+
+.popup-search-input{
+  border: none;
+  width: 90%;
+  height: 40px;
+  font-size: 12pt;
+  border-bottom: 2px solid #EF2021;
+}
+
+#search-ul{
+  padding-left: 29px;
+  background-color: #EFEFF4;
 }

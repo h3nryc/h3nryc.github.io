@@ -56,6 +56,19 @@
         </div>
       </div>
     </div>
+  <!--SEARCH POPUP -->
+    <div class="popup popup-search">
+      <div class="content-block" id="top-small">
+        <div style="margin-left: 0; margin-right: 5px; margin-top: 10px;" class="close-popup link" id="left">
+          <i class="material-icons">arrow_back</i>
+        </div>
+        <input id="search-input"class="popup-search-input" placeholder="&#xE8B6; Users" maxlength="45" style="font-family: sans-serif, Material Icons" />
+        <div class="result">
+          <ul id="search-ul">
+          </ul>
+        </div>
+      </div>
+    </div>
     <!-- Popover /// Post -->
     <div class="views">
      <!-- Your main view, should have "view-main" class -->
@@ -76,13 +89,10 @@
                     <div class="pull-to-refresh-arrow"></div>
                 </div>
                  <div id="view1-content"class="content-block">
-                   <div class="result">
-                     <ul id="search-ul">
-                     </ul>
-                   </div>
+
               </div>
                   <a href="#" data-popup=".popup-post" class="open-popup">
-                   <div class="postbox-link">
+                   <div style="margin-top: 20px;"class="postbox-link">
                      <h3 class="postbox-tag">What's Happening?</h3>
                    </div>
                  </a>
@@ -143,20 +153,25 @@
          <div class="toolbar-inner">
            <a href="#" class="tab-link"><img class="logo" src="./logo.png" alt=""></a>
            <a href="#tab1" class="tab-link active"><i class="material-icons md-light">rss_feed</i></a>
-           <a href="#tab2" onclick="loadNotif();" class="tab-link"><i class="material-icons md-light">thumb_up</i></a>
+           <a href="#tab2" onclick="loadNotif();" class="tab-link"><i class="md-light material-icons">notifications</i></a>
            <a href="#tab3" onclick="loadProfile();"class="tab-link"><i class="material-icons md-light">person_pin</i></a>
            <a href="#tab4" data-panel="right" class="open-panel material-icons md-light tab-link">menu</i></a>
          </div>
        </div>
       <!-- Search box -->
-      <div class="searchbox-out">
-        <div class="searchbox-inner">
-          <input class="searchbox-input" id="search-input" placeholder="&#xE8B6; Search for anything..." maxlength="45" style="font-family: sans-serif, Material Icons" />
+
+        <div class="searchbox-out">
+          <a style="diplay: none;"href="#" data-popup=".popup-search" class="open-popup">
+          <div class="searchbox-inner">
+            <input class="searchbox-input" readonly id="search-input" placeholder="&#xE8B6; Search for users" maxlength="45" style="font-family: sans-serif, Material Icons" />
+          </div>
+            </a>
         </div>
-      </div>
+
     <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/src/JIC.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
   </body>
 </html>
