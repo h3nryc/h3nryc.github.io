@@ -52,7 +52,7 @@ body {
 
 body {
   position: relative;
-  background: #EF2029;
+  background: white;
   margin: 0 auto;
   width: 100%;
   max-width: 320px;
@@ -67,12 +67,12 @@ body {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .small {
   font-size: 0.72em;
-  color: white;
+  color: black;
 }
 
 label.small:hover {
@@ -80,7 +80,7 @@ label.small:hover {
 }
 
 .large {
-  color: #fff;
+  color: black;
   font-size: 1.3em;
   line-height: 1em;
   font-family: Georgia, serif;
@@ -138,4 +138,15 @@ label.small:hover {
 }
 .login label.small {
   padding-left: 0.5em;
+}
+
+.speel{
+  text-align: center;
+  color: black;
+  font-weight: lighter;
+}
+
+.space{
+  position: relative;
+  top: 15px;
 }

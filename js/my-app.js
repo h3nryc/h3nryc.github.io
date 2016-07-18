@@ -1,5 +1,5 @@
 var myApp = new Framework7();
-var socket = io('http://localhost:8080');
+var socket = io('http://back-swiftlyback.rhcloud.com/');
 var $$ = Dom7;
 var ptrContent = $$('.pull-to-refresh-content');
 var skip = 0;
@@ -11,7 +11,6 @@ var storage = window.localStorage;
 var lastEntry = "";
 getPost();
 check();
-
 setInterval(function() {
   check();
 }, 2000);
@@ -24,8 +23,8 @@ function check() {
 socket.emit('Get Username', storage.getItem("logUser"))
 socket.on('Return Username', function(user){
   $('#profile-card-info').append('<p> Your logged in as @'+user+'</p>')
-  $('.profile-photo').append('<img class="changepic" src="http://localhost:8080/uploads/'+user+'.jpg" alt="" />')
-  $('.profile-coverphoto').append('<img src="http://localhost:8080/uploads/cover-'+user+'.jpg" alt="" />')
+  $('.profile-photo').append('<img class="changepic" src="http://back-swiftlyback.rhcloud.com//uploads/'+user+'.jpg" alt="" />')
+  $('.profile-coverphoto').append('<img src="http://back-swiftlyback.rhcloud.com//uploads/cover-'+user+'.jpg" alt="" />')
 })
 var mainView = myApp.addView('.view-main', {
   dynamicNavbar: true
@@ -101,29 +100,26 @@ ptrContent.on('refresh', function (e) {
 //All Functions
 
 function displayTextPost(loc,user,text,time,like,id) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://localhost:8080/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
+  var l = text.length
+  if (l <= 23) {var font = 14}else{var font = 12}
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com//uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p style="font-size: '+font+'pt;">'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 
 function displayImagePost(loc,user,text,time,like,id, ext) {
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://localhost:8080/uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://localhost:8080/uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p>'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
+  var l = text.length
+  if (l <= 23) {var font = 14}else{var font = 12}
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div style="background-image:url(http://back-swiftlyback.rhcloud.com//uploads/'+id+ext+')"valign="bottom" class="card-header color-white no-border"></div> <div class="card-content"> <div class="card-content-inner"> <p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com//uploads/'+user+'.jpg"" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');" class="color-blue">'+user+' <span class="time"> '+timeConverter(time)+'</span></a> <p style="font-size: '+font+'pt;" >'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
-  var time = date + ' ' + month + ' at ' + hour + ':' + min;
+  var time = moment(UNIX_timestamp).fromNow()
   return time;
 }
 
+console.log();
 function like(user, id) {
   var cuser = storage.getItem("logUser");
     socket.emit("Like Post", user, id, cuser)
-    socket.emit('Get Like Count', id)
+    setTimeout(function(){ socket.emit('Get Like Count', id,storage.getItem("logUser")) }, 600);
 }
 
 socket.on('Return Like Count', function(count,id){
@@ -132,7 +128,8 @@ socket.on('Return Like Count', function(count,id){
 
 
 function post() {
-  var postText = document.getElementById("post-text").value;
+  var text = document.getElementById("post-text").value;
+  var postText = text.replace(/<(?:.|\n)*?>/gm, '');
   var user = storage.getItem("logUser");
   var time = Date.now();
     Icon = document.getElementById("imagePost");
@@ -194,20 +191,28 @@ function getUserPosts(user) {
     userSkip = userSkip+4
   }
   $('#unfollow').empty();
-  $('#unfollow').append('<p onclick="unfollowUser('+"'"+user+"'"+');" style="color: red; font-weight: 500;">Unfollow</p>')
+  $('#unfollow').append('<p onclick="unfollowUser('+"'"+user+"'"+');" class="close-popup" style="color: red; font-weight: 500;">Unfollow</p>')
 }
 
 function notFollow(user) {
-  $$('.userPosts').append('<div style="text-align: center;"><i style="margin-top: 10px;"class="material-icons">lock_outline</i><h3>You do not follow this user</h3><h3>Follow them to see their posts</h3><a onclick="followUser('+"'"+user+"'"+');" href="#"><i class="material-icons">person_add</i><h4 style="margin: 0;">Follow</h4></a></div>')
+  $$('.userPosts').append('<div style="text-align: center;"><i style="margin-top: 10px;"class="material-icons">lock_outline</i><h3>You do not follow this user</h3><h3>Follow them to see their posts</h3><a class="close-popup" onclick="followUser('+"'"+user+"'"+');" href="#"><i class="material-icons">person_add</i><h4 style="margin: 0;">Follow</h4></a></div>')
   $('#more-but').empty();
 }
 
 function followUser(user){
   socket.emit('Follow User', storage.getItem("logUser"), user);
+  myApp.addNotification({
+    title: 'Started following @'+user,
+    message: ''
+});
 }
 
 function unfollowUser(user){
   socket.emit('Unfollow User', storage.getItem("logUser"), user);
+  myApp.addNotification({
+    title: 'Unfollowed @'+user,
+    message: ''
+});
 }
 function changeProfilepic() {
   Icon = document.getElementById("ImageSubmit");
@@ -249,14 +254,9 @@ function uploadCoverImage(file, location) {
 	reader.readAsBinaryString(file);
 }
 
-function hexToBase64(str) {
-    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
-}
-
-
 function uploadPostImage(file, location, postText, user, time) {
 	//Reads file content as binary and sends to server
-
+  var postText = postText.replace(/<(?:.|\n)*?>/gm, '');
 	var reader = new FileReader();
 	reader.onload = function(e) {
 		//get all content
@@ -302,7 +302,7 @@ function getNotif() {
 
 socket.on('Send Notif', function(docs){
   for (var i = 0; i < docs.length; i++) {
-    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://localhost:8080/uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs[i].user+"'"+');" id="bold" class="item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
+    $$('#notifList').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://back-swiftlyback.rhcloud.com//uploads/'+docs[i].user+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs[i].user+"'"+');" id="bold" class="item-title">'+docs[i].user+'</div> </div> <div class="item-subtitle">'+docs[i].reason+'</div> </div> </div> </li>')
   }
 })
 
@@ -315,10 +315,9 @@ $('#search-input').keyup(function(event) {
    lastEntry = $('#text').val()
 });
 
-socket.on('Search Result', function(docs){
+socket.on('Search Result', function(docs,count){
   $('#search-ul').empty();
-  // $$('#search-ul').append('<li> <a onclick="navUser('+"'"+docs+"'"+');" href="#"> <div class="search-div"> <div class="search-pic"> <img src="http://localhost:8080/uploads/'+docs+'.jpg" alt=""> </div> <h3>@'+docs+'</h3></div> </a> </li>')
-    $$('#search-ul').append('<li> <div id="no-border" class=" search-div item-content"> <div class="item-media"><img src="http://localhost:8080/uploads/'+docs+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs+"'"+');" id="bold" class="item-title">'+docs+'</div> </div> <div class="item-subtitle"></div> </div> </div> </li>')
+  $$('#search-ul').append('<li> <div id="no-border" class="item-content"> <div class="item-media"><img src="http://back-swiftlyback.rhcloud.com//uploads/'+docs+'.jpg" width="44"></div> <div class="item-inner"> <div class="item-title-row"> <div onclick="navUser('+"'"+docs+"'"+');" class="blue item-title">'+docs+'</div> </div> <div class="item-subtitle">'+count+' Followers</div> </div> </div> </li>')
 })
 
 function logout() {

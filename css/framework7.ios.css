@@ -1399,7 +1399,6 @@ html.pixel-ratio-3 .subnavbar:after {
   right: auto;
   height: 1px;
   width: 100%;
-  background-color: #fff;
   display: block;
   z-index: 15;
   -webkit-transform-origin: 50% 0%;

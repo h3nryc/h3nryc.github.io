@@ -374,7 +374,7 @@ ul{
 
 .searchbox-inner{
   width: auto;
-  height: 40px;
+  height: 33px;
 }
 
 .searchbox-inner input{
@@ -627,9 +627,4 @@ label{
   height: 40px;
   font-size: 12pt;
   border-bottom: 2px solid #EF2021;
-}
-
-#search-ul{
-  padding-left: 29px;
-  background-color: #EFEFF4;
 }
