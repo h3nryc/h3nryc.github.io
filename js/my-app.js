@@ -102,7 +102,7 @@ ptrContent.on('refresh', function (e) {
 function displayTextPost(loc,user,text,time,like,id) {
   var l = text.length
   if (l <= 23) {var font = 14}else{var font = 12}
-  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><div class="profilepic-out"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" class="profilepic" /></div><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p style="font-size: '+font+'pt;">'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
+  $$(''+loc+'').append(' <div class="card demo-card-header-pic"> <div class="card-content"> <div class="card-content-inner"><p class="color-gray"><img src="http://back-swiftlyback.rhcloud.com/uploads/'+user+'.jpg" class="profilepic" /><a href="#" id="profile-link" onclick="navUser('+"'"+user+"'"+','+"'henry'"+');"class="color-blue">'+user+'      <span class="time"> '+timeConverter(time)+'</span></a> <p style="font-size: '+font+'pt;">'+text+'</p> </div> </div> <div class="card-footer"> <a href="#" onclick="like('+"'"+user+"'"+','+"'"+id+"'"+')" class="link"><i class="material-icons">thumb_up</i><span class="like-text">Like</span></a> <p id="'+id+'" class="link">'+like+' Likes</p> </div> </div>')
 }
 
 function displayImagePost(loc,user,text,time,like,id, ext) {
