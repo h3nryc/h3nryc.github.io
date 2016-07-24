@@ -393,9 +393,7 @@ ul{
 }
 
 .profilepic{
-  height: 30px;
-  width: 30px;
-  margin-right: 12px;
+  height: 100%;
 }
 
 #profile-link{
@@ -627,4 +625,11 @@ label{
   height: 40px;
   font-size: 12pt;
   border-bottom: 2px solid #EF2021;
+}
+
+.profilepic-out{
+  height: 30px;
+  width: 30px;
+  margin: 12px;
+  overflow: hidden;
 }

@@ -1,5 +1,5 @@
 //Client side code
-var socket = io('http://back-swiftlyback.rhcloud.com/');
+var socket = io('http://back-swiftlyback.rhcloud.com');
 var $$ = Dom7;
 var myApp = new Framework7();
 var storage = window.localStorage;
