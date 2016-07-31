@@ -46,6 +46,32 @@
 		width: 0;
 		background-color: #ffffff;
 		}
+
+		#actions:hover{
+			color: #7f8c8d;
+			cursor: default;
+		}
+		.float-right{
+			float: right !important;
+			position: relative;
+			right: 20px;
+		}
+		#mode-switch span{
+			font-size: 20pt;
+			float: left !important;
+			margin-top: 12px;
+			margin-left: 12px;
+			cursor: default;
+		}
+		#mode-switch span:hover{
+			color: #3498db;
+		}
+		.hidVid{
+			display: none;
+		}
+		#vid{
+			margin-left: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -66,12 +92,12 @@
 
 		</ul>
 	</div>
-	<div id="vid"style="display: none;">
+	<div id="vid" class="hidVid">
 		    <div id="player"></div>
 	</div>
 	
 	<div style="background-color: #eee; margin-top; 6px;" class="navbar navbar-fixed-bottom">
-		 <p class="text-center">      <span onclick="start();" style="font-size: 30pt;" class="glyphicon glyphicon-play-circle"></span>      <span onclick="stopVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-pause"></span>      <span  onclick="playVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-play"></span>      <span  onclick="nextVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-step-forward"></span></p>
+		 <p class="text-center"> <span id="mode-switch"><span onclick="videoMode();" class="text-left">VIDEO MODE</span></span>    <span id="actions" onclick="start();" style="font-size: 30pt;" class="glyphicon glyphicon-play-circle"></span>   <span id="play-pause">   <span id="actions" onclick="stopVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-pause"></span></span><span  id="actions" onclick="nextVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-step-forward"></span></p>
 	</div>
 <script>
 //Load YT Api
@@ -140,9 +166,13 @@ function onPlayerStateChange(event) {
 //Player Actions
  function stopVideo() {
         player.pauseVideo();
+        $('#play-pause').empty();
+        $('#play-pause').append(' <span id="actions" onclick="playVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-play"></span>')
       }
       function playVideo(){
       	player.playVideo();
+      	$('#play-pause').empty();
+      	$('#play-pause').append('<span id="actions" onclick="stopVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-pause"></span>')
       }
 function nextVideo() {
 	player.stopVideo();
@@ -150,9 +180,11 @@ function nextVideo() {
 	$('#vid').append('<div id="player"></div>');
 	vidList.splice(0, 1);
 	if (vidList[0] === undefined) {
-		alert("You have reached the end of your cue")
+		$('.list-group').find('li').first().remove();
+		alert("You have reached the end of your Qu")
 		return;
 	}else{
+		$('.list-group').find('li').first().remove();
 		passVid(vidList[0])
 	}
 }
@@ -161,6 +193,23 @@ function start(){
 	passVid(vidList[0])
 }
 
+//Change modes
+
+function videoMode() {
+	$('#mode-switch').empty();
+	$('#mode-switch').append('<span onclick="audioMode();" class="text-left">AUDIO MODE</span>')
+	$( "#songs" ).removeClass( "span6 offset3" );
+	$( "#vid" ).removeClass( "hidVid" );
+	$( "#songs" ).addClass( "float-right" );
+}
+
+function audioMode(){
+	$('#mode-switch').empty();
+	$('#mode-switch').append('<span onclick="videoMode();" class="text-left">VIDEO MODE</span>')
+	$( "#vid" ).addClass( "hidVid" );
+	$( "#songs" ).addClass( "span6 offset3" );
+	$( "#songs" ).removeClass( "float-right" );
+}
 </script>
 </body>
 </html>
