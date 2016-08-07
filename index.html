@@ -1,215 +1,107 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Qu - Playlist</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <head>
+    <meta charset="utf-8">
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="./s-io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <title>Current.ly || What is the world searching for</title>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-81625151-1', 'auto');
-	  ga('send', 'pageview');
+      ga('create', 'UA-82069589-1', 'auto');
+      ga('send', 'pageview');
 
-	</script>
-	<style type="text/css">
-	::-webkit-input-placeholder {color: #333;font-weight: 450;}:-moz-placeholder {color: #333;  }::-moz-placeholder {color: #333;}:-ms-input-placeholder {color: #333;}
-		input:focus,
-		select:focus,
-		textarea:focus,
-		button:focus {
-    		outline: none;
-		}
-		#main-input{
-			border: 0;
-			background-color: #eee;
-			height: 80px;
-			font-size: 40pt;
-			width: 100%;
-		}
-		#songs{
-			width: 50%;
-    		margin: 0 auto; 
-		}
-		#progressBar {
-		width: 960px;
-		height: 6px;
-		background-color: #444444;
-		display: none;
-		margin-top: 1px;
-		}
-
-		#progressBar div {
-		height: 100%;
-		width: 0;
-		background-color: #ffffff;
-		}
-
-		#actions:hover{
-			color: #7f8c8d;
-			cursor: default;
-		}
-		.float-right{
-			float: right !important;
-			position: relative;
-			right: 20px;
-		}
-		#mode-switch span{
-			font-size: 20pt;
-			float: left !important;
-			margin-top: 12px;
-			margin-left: 12px;
-			cursor: default;
-		}
-		#mode-switch span:hover{
-			color: #3498db;
-		}
-		.hidVid{
-			display: none;
-		}
-		#vid{
-			margin-left: 20px;
-		}
-	</style>
-</head>
-<body>
-	<div id="main" class="jumbotron">
-		<input id="main-input" type="text" placeholder="Qu - Click here to paste a youtube url"name="link">
-	</div>
-	<div class="fill">
-		<br>
-		<br>
-		<h1 class="text-center" >No Videos Selected</h1>
-		<h4 class="text-center" >This tool lets you easily create a queue of music</h4>
-		<h4 class="text-center" >Try https://www.youtube.com/watch?v=KMU0tzLwhbE</h4>
-		<h4 class="text-center" >Click the circle play button after selecting some songs!</h4>
-	</div>
-
-	<div class="span6 offset3" id="songs">
-		<ul class="list-group">
-
-		</ul>
-	</div>
-	<div id="vid" class="hidVid">
-		    <div id="player"></div>
-	</div>
-	
-	<div style="background-color: #eee; margin-top; 6px;" class="navbar navbar-fixed-bottom">
-		 <p class="text-center"> <span id="mode-switch"><span onclick="videoMode();" class="text-left">VIDEO MODE</span></span>    <span id="actions" onclick="start();" style="font-size: 30pt;" class="glyphicon glyphicon-play-circle"></span>   <span id="play-pause">   <span id="actions" onclick="stopVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-pause"></span></span><span  id="actions" onclick="nextVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-step-forward"></span></p>
-	</div>
-<script>
-//Load YT Api
-      var tag = document.createElement('script');
-      var vidList = [];
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-$(document).ready(function() {
-   $("#main-input").keyup(function(e) {
-    if (e.which == 13) {
-    	var input = $('#main-input').val();
-      main(input)
-    }
-	});
-   $(document).keydown(function(e){
-    if (e.keyCode == 39) { 
-       nextVideo();
-       return false;
-    }
-});
-});
-var player;
-function main(input){
-	$('#main-input').val('');
-	$(".fill").empty()
-	$('.list-group').append('<li class="list-group-item text-center">'+input+'</li>')
-	input = input.substr(input.lastIndexOf('=') + 1);
-    vidList.push(input);	
-}
- //Gets Ready to make player
-function passVid(input){
-	console.log("passVid")
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: input,
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-}
-	 	      
-
-function getTitle(data) {
- var feed = data.feed;
- var entries = feed.entry || [];
-  for (var i = 0; i < entries.length; i++) {
-   var entry = entries[i];
-   var title = entry.title.$t;
-  }
- } 
-
-// When ready makes Player
-      function onPlayerReady(event) {
-        event.target.playVideo();
+    </script>
+    <style media="screen">
+      #title{
+        background-color: #222;
+        opacity: 0.5;
       }
-//Fires when video is done
-function onPlayerStateChange(event) {
-        if (event.data == 0) {
-          nextVideo()
+      #modal-link:hover{
+        color: pink;
+      }
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+    <div class="container">
+      <div class="center">
+        <div class="text">
+              <h2 style="color: #e67e22;">Current.ly</h2><p>This is more than just a news site. <a class="waves-effect waves-light modal-trigger" onclick=""href="#modal1">Why?</a></p>
+            <div class="load">
+                <div class="preloader-wrapper big active"> <div class="spinner-layer spinner-blue"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-red"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-yellow"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-green"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> </div>
+            </div>
+          </div>
+          <div id="res" class="res">
+
+          </div>
+      </div>
+    </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Not your average news site.</h4>
+          <p>Current.ly uses trending google searches to detremine what is popular at the moment. The articles are refreshed every hour to give a constant stream of news. All infomation is aggregated from around the web to give you the best posible news. The articles are then displayed with a sentance that best describes them.</p>
+        </div>
+        <div class="modal-footer">
+          <a onclick="why()" href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Thants Cool (close)</a>
+        </div>
+    </div>
+  </main>
+    <footer style="background-color: #e67e22;" class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Disclaimer</h5>
+            <p class="grey-text text-lighten-4">All images and articles are owned by there respecitve owners.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        Made with love by Henry.
+        <a class="grey-text text-lighten-4 right" href="#!">😊                                        📰                                        💙</a>
+        </div>
+      </div>
+</footer>
+    <script type="text/javascript">
+    var socket = io("http://localhost:8080")
+    $(document).ready(function() {
+      //Materilize Int
+      $('.modal-trigger').leanModal();
+      $('.materialboxed').materialbox();
+      //Fetch Data
+      socket.emit('Fetch Data')
+    });
+
+    socket.on('Res Data', function (data) {
+        $('.load').empty();
+        $('#res').empty();
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].img == undefined){
+          data[i].img = "https://mave.me/img/projects/full_placeholder.png";
         }
+        $('#res').append(' <div class="card"> <div class="card-image"> <img src="'+data[i].img+'"> <span id="title"class="card-title">'+data[i].title+'</span> </div> <div class="card-content"> <p>'+data[i].snippet+'<a target="_blank" href="'+data[i].link+'"> Learn More</a></p> </div> <div class="card-action"> <a target="_blank" href="http://'+data[i].displayLink+'">'+data[i].displayLink+'</a> </div> </div>')
       }
-//Player Actions
- function stopVideo() {
-        player.pauseVideo();
-        $('#play-pause').empty();
-        $('#play-pause').append(' <span id="actions" onclick="playVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-play"></span>')
-      }
-      function playVideo(){
-      	player.playVideo();
-      	$('#play-pause').empty();
-      	$('#play-pause').append('<span id="actions" onclick="stopVideo();" style="font-size: 30pt;" class="glyphicon glyphicon-pause"></span>')
-      }
-function nextVideo() {
-	player.stopVideo();
-	$('#vid').empty();
-	$('#vid').append('<div id="player"></div>');
-	vidList.splice(0, 1);
-	if (vidList[0] === undefined) {
-		$('.list-group').find('li').first().remove();
-		alert("You have reached the end of your Qu")
-		return;
-	}else{
-		$('.list-group').find('li').first().remove();
-		passVid(vidList[0])
-	}
-}
 
-function start(){
-	passVid(vidList[0])
-}
+    })
 
-//Change modes
 
-function videoMode() {
-	$('#mode-switch').empty();
-	$('#mode-switch').append('<span onclick="audioMode();" class="text-left">AUDIO MODE</span>')
-	$( "#songs" ).removeClass( "span6 offset3" );
-	$( "#vid" ).removeClass( "hidVid" );
-	$( "#songs" ).addClass( "float-right" );
-}
+    </script>
 
-function audioMode(){
-	$('#mode-switch').empty();
-	$('#mode-switch').append('<span onclick="videoMode();" class="text-left">VIDEO MODE</span>')
-	$( "#vid" ).addClass( "hidVid" );
-	$( "#songs" ).addClass( "span6 offset3" );
-	$( "#songs" ).removeClass( "float-right" );
-}
-</script>
-</body>
+  </body>
 </html>
