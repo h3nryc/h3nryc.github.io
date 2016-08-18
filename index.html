@@ -1,110 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="apple-mobile-web-app-status-bar-style" content="#EF2021">
     <meta charset="utf-8">
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script src="./s-io.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <title>Current.ly || What is the world searching for</title>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-82069589-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-    <style media="screen">
-      #title{
-        background-color: #222;
-        opacity: 0.5;
-      }
-      #modal-link:hover{
-        color: pink;
-      }
-      body {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-      }
-
-      main {
-        flex: 1 0 auto;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Unum</title>
+    <link rel="stylesheet" href="css/framework7.ios.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/my-app.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <script src="js/weather.js"></script>
+    <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="sydney")&format=json&callback=callbackFunction1'></script>
   </head>
   <body>
-    <main>
-    <div class="container">
-      <div class="center">
-        <div class="text">
-              <h2 style="color: #e67e22;">Current.ly</h2><p>This is more than just a news site. <a class="waves-effect waves-light modal-trigger" onclick=""href="#modal1">Why?</a></p>
-            <div class="load">
-                <div class="preloader-wrapper big active"> <div class="spinner-layer spinner-blue"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-red"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-yellow"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> <div class="spinner-layer spinner-green"> <div class="circle-clipper left"> <div class="circle"></div> </div><div class="gap-patch"> <div class="circle"></div> </div><div class="circle-clipper right"> <div class="circle"></div> </div> </div> </div>
+
+    <div class="page-content">
+        <!-- Slider Main -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+           <!-- You tab -->
+            <div id="you" class="swiper-slide">
+              <div class="hero-img">
+              <h2 class="logo">unum | you</h2>
+              </div>
+              <div class="main-list">
+              <!-- You list -->
+                <ul class="you-list">
+                  <li class="wet-card">
+                    <div class="emoji-left">
+                      <h2>👋</h2>
+                    </div>
+                    <div class="wet-text">
+                      <h2><div style='display: inline;' id='onewordweather'></div>&nbsp<div style='display: inline;' id='temp'></div></h2>
+                      <p>Have a nice day!</p>
+                    </div>
+                  </li>
+                  <li class="food-card">
+                    <div class="food-head">
+                      <h2>🍴 Food</h2>
+                    </div>
+                    <div class="food-hero"></div>
+                    <div class="food-footer">
+                      <h2>Sushi Den</h2>
+                      <p style="margin: 0;">It looks like it's dinner time this restruant is 2km away</p>
+                    </div>
+                  </li>
+                  <li class="event-card">
+                    <div class="event-head">
+                      <h2>🎉 Event - Coldplay</h2>
+                    </div>
+                    <div class="event-hero"></div>
+                    <div class="event-footer">
+                      <h2>When - 12 August 8:30pm - 10:30pm</h2>
+                      <p>Rose Bowl Stadium 1001 Rose Bowl Dr.
+Pasadena, California 91103</p>
+                    </div>
+                  </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!-- World tab -->
+            <div id="world" class="swiper-slide">
+              
             </div>
           </div>
-          <div id="res" class="res">
-
-          </div>
-      </div>
-    </div>
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h4>Not your average news site.</h4>
-          <p>Current.ly uses trending google searches to detremine what is popular at the moment. The articles are refreshed every hour to give a constant stream of news. All infomation is aggregated from around the web to give you the best posible news. The articles are then displayed with a sentance that best describes them.</p>
-        </div>
-        <div class="modal-footer">
-          <a onclick="why()" href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Thants Cool (close)</a>
+          <div class="swiper-pagination"></div>
         </div>
     </div>
-  </main>
-    <footer style="background-color: #e67e22;" class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Disclaimer</h5>
-            <p class="grey-text text-lighten-4">All images and articles are owned by there respecitve owners.</p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-        Made with love by Henry.
-        <a class="grey-text text-lighten-4 right" href="#!">😊                                        📰                                        💙</a>
-        </div>
-      </div>
-</footer>
-    <script type="text/javascript">
-    var socket = io("http://cly-swiftlyback.rhcloud.com")
-    $(document).ready(function() {
-      //Materilize Int
-      $('.modal-trigger').leanModal();
-      $('.materialboxed').materialbox();
-      //Fetch Data
-      socket.emit('Fetch Data')
-    });
 
-    socket.on('Res Data', function (data) {
-        $('.load').empty();
-        console.log(data);
-      for (var i = 0; i < data.length; i++) {
-      	if (i == 25) {
-      		return;
-      	}
-        if (data[i].img == undefined){
-          data[i].img = "https://mave.me/img/projects/full_placeholder.png";
-        }
-        $('#res').append(' <div class="card"> <div class="card-image"> <img src="'+data[i].img+'"> <span id="title"class="card-title">'+data[i].title+'</span> </div> <div class="card-content"> <p>'+data[i].snippet+'<a target="_blank" href="'+data[i].link+'"> Learn More</a></p> </div> <div class="card-action"> <a target="_blank" href="http://'+data[i].displayLink+'">'+data[i].displayLink+'</a> </div> </div>')
-      }
-
-    })
-
-
-    </script>
-
+    <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
   </body>
 </html>

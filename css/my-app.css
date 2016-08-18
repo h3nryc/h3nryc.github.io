@@ -1,0 +1,178 @@
+/* font-weight: 400; for all*/
+li{
+	margin-bottom: 20px;
+}
+
+*{
+	font-family: 'Open Sans', sans-serif;
+}
+
+.swiper-container {
+  height: 100%;
+}
+.swiper-slide {
+  background:#fff;
+  overflow: scroll;
+}
+.swiper-slide span {
+  text-align: center;
+  display: block;
+  margin: 20px;
+  font-size: 21px;
+}
+
+.hero-img{
+	height: 250px;
+	width: 100%;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+	background-image: url("../hero.jpg");
+}
+
+.logo{
+	margin: 0;
+	text-align: center;
+	position: relative;
+	top: 120px;
+	font-size: 30pt;
+	color: white;
+}
+
+.you-list{
+	text-align: center;
+	list-style: none;
+	margin-top: 12px;
+	padding-left: 0;
+}
+
+.wet-card{
+	color: white;
+	background-color: #1abc9c;
+	display: inline-block;
+	min-height: 60px;
+	width: 95%;
+-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+
+
+}
+
+.emoji-left h2 {
+	float: left;
+	font-size: 30pt;
+	margin: 0;
+}
+
+.emoji-left{
+	padding-left: 10px;
+	padding-top: 5px;
+}
+
+.wet-text{
+	padding-left: 75px;
+}
+
+.wet-text h2{
+	font-size: 14pt;
+	margin: 0;
+	font-weight: 400;
+	text-align: left;
+}
+
+.wet-text p {
+	margin: 0;
+	text-align: left;
+}
+
+.food-card{
+	display: inline-block;
+	background-color: #34495e;
+	min-height: 400px;
+	width: 95%;
+	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+}
+
+.food-head{
+	padding-top: 12px;
+	padding-left: 12px;
+	padding-bottom: 12px;
+}
+
+.food-head h2{
+	color: white;
+	margin: 0;
+	text-align: left;
+}
+
+.food-hero{
+	text-align: center;
+	min-height: 250px;
+	width: 100%;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+	background-image: url("../theden.jpg");
+}
+
+.food-footer{
+	color: white;
+	padding-top: 12px;
+	padding-left: 12px;
+	text-align: left;
+}
+
+.food-footer h2{
+	margin: 0;
+}
+
+.event-card{
+	display: inline-block;
+	background-color: #9b59b6;
+	height: 440px;
+	width: 95%;
+	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+}
+
+.event-head{
+	padding-top: 12px;
+	padding-left: 12px;
+	padding-bottom: 12px;
+}
+
+.event-head h2{
+	color: white;
+	margin: 0;
+	text-align: left;
+}
+
+.event-hero{
+	text-align: center;
+	height: 250px;
+	width: 100%;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+	background-image: url("../coldplay.jpg");
+}
+
+.event-footer{
+	color: white;
+	padding-top: 12px;
+	padding-left: 12px;
+	text-align: left;
+}
+
+.event-footer h2{
+	margin: 0;
+}
+
+
+.event-footer p{
+	margin: 0;
+}
