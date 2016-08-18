@@ -4,3 +4,14 @@ var myApp = new Framework7();
   var mySwiper = myApp.swiper('.swiper-container', {
     pagination:'.swiper-pagination'
   });
+
+
+
+function more() {
+	if ($(".wet-card").height() == 400) {
+			$(".wet-card").animate({height: 60});
+	}else{
+		$(".wet-card").animate({height: 400});
+	}
+
+}
