@@ -15,8 +15,12 @@
     <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="sydney")&format=json&callback=callbackFunction1'></script>
   </head>
   <body>
-
-    <div class="page-content">
+    <div class="page-content pull-to-refresh-content" data-ptr-distance="55">
+      <div class="pull-to-refresh-layer">
+      <div class="preloader"></div>
+      <div class="pull-to-refresh-arrow"></div>
+    </div>
+    <!-- Default pull to refresh layer-->
         <!-- Slider Main -->
         <div class="swiper-container">
           <div class="swiper-wrapper">
@@ -29,22 +33,16 @@
               <!-- You list -->
                 <ul class="you-list">
                   <li onclick="more();" class="wet-card">
-                    <div class="emoji-left">
-                      <h2>👋</h2>
+                    <div id='emoji-left' class="emoji-left">
+                      <h2>👋</h2> 
                     </div>
                     <div class="wet-text">
                       <h2><div style='display: inline;' id='onewordweather'></div>&nbsp<div style='display: inline;' id='temp'></div></h2>
                       <p>Have a nice day!</p>
+                      <h1 id="demo"></h1>
                     </div>
-                  </li>
-                  <li class="food-card">
-                    <div class="food-head">
-                      <h2>🍴 Food</h2>
-                    </div>
-                    <div class="food-hero"></div>
-                    <div class="food-footer">
-                      <h2>Sushi Den</h2>
-                      <p style="margin: 0;">It looks like it's dinner time this restruant is 2km away</p>
+                    <div id='wet-hidden' class="wet-hidden">
+                      <ul id="wet-list"></ul>
                     </div>
                   </li>
                   <li class="event-card">
@@ -70,7 +68,6 @@ Pasadena, California 91103</p>
           <div class="swiper-pagination"></div>
         </div>
     </div>
-
     <script type="text/javascript" src="lib/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
