@@ -128,6 +128,7 @@ function type2Color(type) {
 		
 	}
 }
-
-
+window.onload = function () {
+ getNearby();   
+}
 
