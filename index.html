@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/framework7.ios.css">
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="css/my-app.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <script src="js/weather.js"></script>
     <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="sydney")&format=json&callback=callbackFunction1'></script>
   </head>
@@ -25,8 +27,8 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
            <!-- You tab -->
-            <div id="you" class="swiper-slide">
-              <div class="hero-img">
+            <div id="you" class="swiper-slide ">
+              <div class="hero-img ">
               <h2 class="logo">unum | you</h2>
               </div>
               <div class="main-list">
@@ -45,17 +47,7 @@
                       <ul id="wet-list"></ul>
                     </div>
                   </li>
-                  <li class="event-card">
-                    <div class="event-head">
-                      <h2>🎉 Event - Coldplay</h2>
-                    </div>
-                    <div class="event-hero"></div>
-                    <div class="event-footer">
-                      <h2>When - 12 August 8:30pm - 10:30pm</h2>
-                      <p>Rose Bowl Stadium 1001 Rose Bowl Dr.
-Pasadena, California 91103</p>
-                    </div>
-                  </li>
+                  <div id="event-start"></div>
                   </ul>
                 </ul>
               </div>
