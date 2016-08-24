@@ -245,7 +245,7 @@ Start Events
 
 function getEvent() {
 	var eventKey = "HJRp25zS5jm5NJQr"
-	var eventLink = "http://api.eventful.com/json/events/search?app_key="+eventKey+"&where="+localStorage.getItem("lat")+","+localStorage.getItem("long")+"&within=25&units=km&sort_order=popularity"
+	var eventLink = "https://api.eventful.com/json/events/search?app_key="+eventKey+"&where="+localStorage.getItem("lat")+","+localStorage.getItem("long")+"&within=25&units=km&sort_order=popularity"
 		$.ajax({
   		url: eventLink,
   		dataType: 'jsonp',
@@ -260,7 +260,9 @@ function getEvent() {
            		var lat = data.events.event[i].latitude;
            		var long = data.events.event[i].longitude;		
 				try {
-    				var image = data.events.event[i].image.medium.url;
+    				var preImg = data.events.event[i].image.medium.url;
+    				var image = preImg.replace(/^http:\/\//i, 'https://');
+
 				}
 				catch(err) {
     				var image = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRzbjllLfcybGqvOmehP2qaxFPAs5IXz5XLolnAfu_CuXh5eFLoevIxsTuh"
