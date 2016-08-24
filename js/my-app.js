@@ -77,6 +77,17 @@ function closePopup() {
 		$('.info-card').remove();
 	});
 }
+
+function trunc(text) {
+	var pre = text.substring(0,26);
+	if (text.length >= 26) {
+		var final = pre+"...";
+		return final;
+	} else {
+		return pre;
+	}
+
+}
 /*
 
 End Main Functions
@@ -137,7 +148,8 @@ function getVenue() {
     	
   			for (var i = 0; i < 6; i++) {
   				//Unpack function
-           		var name = data.response.venues[i].name;
+           		var pre = data.response.venues[i].name;
+           		var name = trunc(pre);
            		var type = data.response.venues[i].categories[0].shortName;
            		var tip = data.response.venues[i].stats.tipCount;
            		var address = data.response.venues[i].location.address;
@@ -243,7 +255,8 @@ function getEvent() {
 
   			for (var i = 0; i < 6; i++) {
   				//Unpack function
-           		var name = data.events.event[i].title;
+           		var pre = data.events.event[i].title;
+           		var name = trunc(pre);
            		var lat = data.events.event[i].latitude;
            		var long = data.events.event[i].longitude;		
 				try {
@@ -258,9 +271,11 @@ function getEvent() {
            		var id = data.events.event[i].id;
            		var eventfulUrl = data.events.event[i].url;
            		var cityName = data.events.event[i].city_name;
+           		var provider = "Eventful"
+           		var emoji = "🎉";
            		//Append data to list
            		var rand = Math.floor(Math.random() * 7) + 1
-           		$('#event-start').after(' <li style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
+           		$('#event-start').after(' <li onclick="loadMore('+"'"+name+"'"+','+lat+','+long+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+venueAddress+"'"+','+"'"+emoji+"'"+','+"'"+type2Color(rand)+"'"+')" style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
            	} 
 
 
