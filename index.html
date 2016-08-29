@@ -16,7 +16,7 @@
     <script src="js/weather.js"></script>
     <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="sydney")&format=json&callback=callbackFunction1'></script>
   </head>
-  <body>
+  <body onclick="closePop()">
     <div class="page-content pull-to-refresh-content" data-ptr-distance="55">
       <div class="pull-to-refresh-layer">
       <div class="preloader"></div>
@@ -59,10 +59,10 @@
                     </div>
                     <div class="pop-but">
                       <ul class="but-list">
-                        <li><a><div class="but">Sushi</div></a></li>
-                        <li><a><div class="but">Asian</div></a></li>
-                        <li><a><div class="but">Asian</div></a></li>
-                        <li><a><div class="but">Asian</div></a></li>
+                        <li><a><div onclick="getRest('Chinese')" class="but">Chinese Food</div></a></li>
+                        <li><a><div onclick="getRest('Burger')" class="but">Burger</div></a></li>
+                        <li><a><div onclick="getRest('Sea%20Food')" class="but">Seafood</div></a></li>
+                        <li><a><div onclick="getRest('Thai')" class="but">Thai</div></a></li>
                       </ul>
                       
                     </div>
