@@ -6,7 +6,7 @@
 	
 */
 var myApp = new Framework7(); 
-var socket = io.connect('http://localhost:3000/');
+var socket = io.connect('https://unum-back.herokuapp.com/');
 var $$ = Dom7;
   // Init slider and store its instance in mySwiper variable
   var mySwiper = myApp.swiper('.swiper-container', {
