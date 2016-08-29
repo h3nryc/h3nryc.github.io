@@ -79,10 +79,19 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
-	console.log(n)
-	if(n == 18 || n == 19 || 20){
+	if(n >= 18 && n <= 20){
 		//Dinner Time
 		
+	}else if(n >= 1 && n <= 8){
+		$('.hero-img').css('background-image','url(../sunrise.jpg)');
+	}else if (n >= 9 && n <= 12){
+		$('.hero-img').css('background-image','url(../day.jpg)');
+	}else if (n >= 13 && n <= 17){
+		console.log(1)
+		$('.hero-img').css('background-image','url(../day.jpg)');
+	}else{
+		console.log(1)
+		$('.hero-img').css('background-image','url(../night.jpg)');
 	}
 }
 
@@ -189,6 +198,7 @@ function type2Color(type) {
 //Call Function on load
 window.onload = function () {
  getNearby();
+ smartInfo()
 }
 
 
