@@ -6,7 +6,7 @@
 	
 */
 var myApp = new Framework7(); 
-var socket = io.connect('https://unum-back.herokuapp.com/');
+var socket = io.connect('http://localhost:3000/');
 var $$ = Dom7;
   // Init slider and store its instance in mySwiper variable
   var mySwiper = myApp.swiper('.swiper-container', {
@@ -80,18 +80,23 @@ function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
 			console.log(n)
-	if(n >= 18 && n <= 20){
+	if(n >= 18 && n <= 24){
 		//Dinner Time
 		$('.hero-img').css('background-image','url(../night.jpg)');
-	}else if(n >= 1 && n <= 8){
+		$('.smart-start').empty();
+		$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"> <h2>🍲</h2> </div> <div class="wet-text"> <h2>Its dinner time!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Chinese\')" class="but">Chinese Food</div></a></li> <li><a><div onclick="getRest(\'Burger\')" class="but">Burger</div></a></li> <li><a><div onclick="getRest(\'Sea&20Food\')" class="but">Seafood</div></a></li> <li><a><div onclick="getRest(\'Thai\')" class="but">Thai</div></a></li> </ul> </div> </div> </li>')
+	}else if(n >= 1 && n <= 10){
+		$('.smart-start').empty();
+			$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"><h2>☕️</h2> </div> <div class="wet-text"> <h2>Good Morning!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Cafe\')" class="but">Coffee</div></a></li> <li><a><div onclick="getRest(\'Pancakes\')" class="but">Pancakes</div></a></li> <li><a><div onclick="getRest(\'Breakfast\')" class="but">Breakfast Spot</div></a></li> <li><a><div onclick="getRest(\'Brunch\')" class="but">Brunch Spot</div></a></li> </ul> </div> </div> </li>')
 		$('.hero-img').css('background-image','url(../sunrise.jpg)');
-	}else if (n >= 9 && n <= 12){
+	}else if (n >= 11 && n <= 12){
+		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../day.jpg)');
 	}else if (n >= 13 && n <= 17){
+		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../day.jpg)');
-	}else if (n >= 18 && n <= 24){ 
-		$('.hero-img').css('background-image','url(../night.jpg)');
 	}else{
+		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../night.jpg)');
 	}
 }
@@ -101,15 +106,15 @@ function navLink(link) {
 }
 
 function popupBox(head,body,number,address,type) {
-	if(name == "fail"){
-		$('.main-list').append('<div style="background-color: #e67e22;" class="popup-rest"> <div class="popup-head" > <h2>Unable to find near restarunts! 😫</h2> </div> <hr> <div class="popup-body"> <p> Sorry for the trouble <br> There are no restarunts near by!</p> </div> <div class="popup-number"> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
+	if(head == "fail"){
+		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>Unable to find near restarunts!</h2> </div> <hr> <div class="popup-body"> <p> There are no restarunts nearby!</p> </div> <div class="popup-number"> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
 	}else{
-		$('.main-list').append('<div style="background-color: #e67e22;" class="popup-rest"> <div class="popup-head" > <h2>🍴 '+head+'</h2> </div> <hr> <div class="popup-body"> <p> Food here we come! 😎 <br>This great restarunt is located on '+address+'</p> </div> <div class="popup-number"> <a href="tel:'+number+'"><div style="background-color: #2ecc71;" class="but">📞 '+number+'</div></a> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
+		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>🍴 '+head+'</h2> </div> <hr> <div class="popup-body"> <p> Food here we come! 😎 <br>This great restarunt is located on '+address+'</p> </div> <div class="popup-number"> <a href="tel:'+number+'"><div style="background-color: #2ecc71;" class="but">📞 '+number+'</div></a> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
 	}
 }
 
 function closePop() {
-	$('.popup-rest').toggle();
+	$('.popup-rest').remove();
 }
 
 function getRest(type) {
@@ -152,7 +157,7 @@ function getNearby(position) {
 
 
 socket.on('displayVenue', function (image,name,type,tip,address,city,vLat,vLong,verified,id,provider) {
-	$( ".wet-card" ).slideDown().after( ' <li onclick="loadMore('+"'"+type+"'"+','+vLat+','+vLong+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+address+"'"+','+"'"+type2Emoji(type)+"'"+','+"'"+type2Emoji(type)+"'"+')" style="background-color: '+type2Color(type)+';"class="food-card"> <div class="food-head"> <h2>'+type2Emoji(type)+'  '+type+' - '+tip+' tips</h2> </div> <div style="background-image: url('+image+');" class="food-hero"></div> <div class="food-footer"> <h2>'+name+'</h2> <p style="margin: 0;">This '+type+' is located on '+address+' '+city+'</p> </div> </li>' );
+	$( "#venue-start" ).slideDown().after( ' <li onclick="loadMore('+"'"+type+"'"+','+vLat+','+vLong+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+address+"'"+','+"'"+type2Emoji(type)+"'"+','+"'"+type2Emoji(type)+"'"+')" style="background-color: '+type2Color(type)+';"class="food-card"> <div class="food-head"> <h2>'+type2Emoji(type)+'  '+type+' - '+tip+' tips</h2> </div> <div style="background-image: url('+image+');" class="food-hero"></div> <div class="food-footer"> <h2>'+name+'</h2> <p style="margin: 0;">This '+type+' is located on '+address+' '+city+'</p> </div> </li>' );
 })
 
 

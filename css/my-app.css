@@ -375,8 +375,8 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 }
 
 .popup-rest{
-	background-color: pink;
 	position: fixed;
+	color: white;
 	 top: 50%;
   	left: 50%;
   	transform: translate(-50%, -50%);
@@ -385,6 +385,7 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	min-height: 220px;
 	padding-right: 10px;
 	padding-left: 10px;
+	border-radius: 3px;
 	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
     box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
@@ -393,5 +394,5 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 .popup-rest hr {
  	border: 0;
     height: 1px;
-    background: #ecf0f1;
+    background: #1565C0;
 }
