@@ -79,7 +79,6 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
-			console.log(n)
 	if(n >= 18 && n <= 24){
 		//Dinner Time
 		$('.hero-img').css('background-image','url(../night.jpg)');
@@ -105,15 +104,20 @@ function navLink(link) {
 	window.location.href = link;
 }
 
-function popupBox(head,body,number,address,type) {
+function popupBox(head,body,number,address,type,lat,long) {
+
+if (address == null){address = "We could not find an adress but here is the venue on a map"}else{address = "This venue is located on "+address}
+var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
 	if(head == "fail"){
 		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>Unable to find near restarunts!</h2> </div> <hr> <div class="popup-body"> <p> There are no restarunts nearby!</p> </div> <div class="popup-number"> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
 	}else{
-		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>🍴 '+head+'</h2> </div> <hr> <div class="popup-body"> <p> Food here we come! 😎 <br>This great restarunt is located on '+address+'</p> </div> <div class="popup-number"> <a href="tel:'+number+'"><div style="background-color: #2ecc71;" class="but">📞 '+number+'</div></a> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
+		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>🍴 '+head+'</h2> </div> <hr> <div class="popup-body"> <p> Food here we come! 😎 <br>'+address+'</p> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <br><div class="popup-number"> <a href="tel:'+number+'"><div style="background-color: #2ecc71;" id="phone-but" class="but">📞 '+number+'</div></a> <br><p>Close ❌</p></div> </div>').hide().fadeIn();
+	if (number == null) {$('#phone-but').hide()}
 	}
 }
 
 function closePop() {
+	$('#phone-but').show()
 	$('.popup-rest').remove();
 }
 
@@ -165,8 +169,8 @@ socket.on('displayEvent', function (name,lat,long,id,provider,rand,emoji,eventfu
    $('#event-start').after(' <li onclick="loadMore('+"'"+name+"'"+','+lat+','+long+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+venueAddress+"'"+','+"'"+emoji+"'"+','+"'"+type2Color(rand)+"'"+')" style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
 })         	
 
-socket.on('displayRest', function (name,address,phone,type) {
-  popupBox(name,name,phone,address,type)
+socket.on('displayRest', function (name,address,phone,type,lat,long) {
+  popupBox(name,name,phone,address,type,lat,long)
  }) 
 
 function type2Emoji(type) {
