@@ -8,6 +8,7 @@
 var myApp = new Framework7(); 
 var socket = io.connect('https://unum-back.herokuapp.com/');
 var $$ = Dom7;
+var scoll;
   // Init slider and store its instance in mySwiper variable
   var mySwiper = myApp.swiper('.swiper-container', {
     pagination:'.swiper-pagination'
@@ -58,6 +59,8 @@ function deg2rad(deg) {
 }
 
 function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
+	scroll = $(window).scrollTop()
+	$(window).scrollTop('0')
 	var distance = getDistance(lat,long,localStorage.getItem("lat"),localStorage.getItem("long"));
 	var time = distance * 0.50;
 	var uberFare = Number(distance * 1.50 + 5 + time).toFixed(2);
@@ -71,6 +74,7 @@ function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
 }
 
 function closePopup() {
+	$(window).scrollTop(scroll)
 	$('.info-card').animate({width: 'toggle'}, 120, function(){
 		$('.info-card').remove();
 	});
@@ -79,6 +83,8 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
+			console.log(n)
+			n = 20
 	if(n >= 18 && n <= 24){
 		//Dinner Time
 		$('.hero-img').css('background-image','url(../night.jpg)');
@@ -139,6 +145,7 @@ Start Nearby Places
 
 
 function getNearby(position) {
+	console.log("ok")
 	//Get geo location
 	if(localStorage.getItem("lat") == undefined){
 		navigator.geolocation.getCurrentPosition(function(location) {
