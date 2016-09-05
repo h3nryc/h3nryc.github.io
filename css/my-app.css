@@ -232,7 +232,9 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
     height:100%;
     top:0px;
     left:0px;
-    z-index:1000;
+    right: 0px;
+    bottom: 0px;
+    z-index:999;
 }
 
 .info-card {
@@ -240,7 +242,6 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	text-align: left;
 	margin: 0;
 	color: white;
-	position: fixed;
 }
 
 .info-head{

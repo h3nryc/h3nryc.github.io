@@ -3,12 +3,12 @@
 	  Unum (c) All rights reserved.
 	 The code that powers unum front.
 	Coded by Henry Confos & Tom Lister.
-	
+
 */
-var myApp = new Framework7(); 
+var myApp = new Framework7();
 var socket = io.connect('https://unum-back.herokuapp.com/');
 var $$ = Dom7;
-var scoll;
+var scoll = 0;
   // Init slider and store its instance in mySwiper variable
   var mySwiper = myApp.swiper('.swiper-container', {
     pagination:'.swiper-pagination'
@@ -23,10 +23,9 @@ function more() {
 		$(".wet-card").animate({height: 350});
 		$(".wet-hidden").fadeToggle("slow")
 	}
-
 }
 var ptrContent = $$('.pull-to-refresh-content');
- 
+
 // Add 'refresh' listener on it
 ptrContent.on('refresh', function (e) {
 		location.reload();
@@ -43,13 +42,13 @@ Start Main Functions
 function getDistance(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
+  var dLon = deg2rad(lon2-lon1);
+  var a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c; // Distance in km
   return Number(d).toFixed(2);
 }
@@ -59,8 +58,7 @@ function deg2rad(deg) {
 }
 
 function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
-	scroll = $(window).scrollTop()
-	$(window).scrollTop('0')
+  scoll = $('.swiper-slide').scrollTop();
 	var distance = getDistance(lat,long,localStorage.getItem("lat"),localStorage.getItem("long"));
 	var time = distance * 0.50;
 	var uberFare = Number(distance * 1.50 + 5 + time).toFixed(2);
@@ -69,12 +67,13 @@ function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
 	var taxiLink = "https://www.google.com.au/#safe=active&q=book%20a%20taxi"
 	var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
 	$('.main-list').after(' <div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div>');
-	$('.info-card').hide()
+  $('.swiper-slide').scrollTop('0');
+  $('.info-card').hide()
 	$('.info-card').animate({width: 'toggle'}, 120);
 }
 
 function closePopup() {
-	$(window).scrollTop(scroll)
+  $('.swiper-slide').scrollTop(scoll);
 	$('.info-card').animate({width: 'toggle'}, 120, function(){
 		$('.info-card').remove();
 	});
@@ -83,26 +82,28 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
-			console.log(n)
-			n = 20
 	if(n >= 18 && n <= 24){
 		//Dinner Time
-		$('.hero-img').css('background-image','url(../night.jpg)');
+		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
 		$('.smart-start').empty();
-		$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"> <h2>🍲</h2> </div> <div class="wet-text"> <h2>Its dinner time!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Chinese\')" class="but">Chinese Food</div></a></li> <li><a><div onclick="getRest(\'Burger\')" class="but">Burger</div></a></li> <li><a><div onclick="getRest(\'Sea&20Food\')" class="but">Seafood</div></a></li> <li><a><div onclick="getRest(\'Thai\')" class="but">Thai</div></a></li> </ul> </div> </div> </li>')
+    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1463096351051-3cf0a64d4079)');
+    $('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"> <h2>🍲</h2> </div> <div class="wet-text"> <h2>Its dinner time!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Chinese\')" class="but">Chinese Food</div></a></li> <li><a><div onclick="getRest(\'Burger\')" class="but">Burger</div></a></li> <li><a><div onclick="getRest(\'Sea&20Food\')" class="but">Seafood</div></a></li> <li><a><div onclick="getRest(\'Thai\')" class="but">Thai</div></a></li> </ul> </div> </div> </li>')
 	}else if(n >= 1 && n <= 10){
 		$('.smart-start').empty();
-			$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"><h2>☕️</h2> </div> <div class="wet-text"> <h2>Good Morning!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Cafe\')" class="but">Coffee</div></a></li> <li><a><div onclick="getRest(\'Pancakes\')" class="but">Pancakes</div></a></li> <li><a><div onclick="getRest(\'Breakfast\')" class="but">Breakfast Spot</div></a></li> <li><a><div onclick="getRest(\'Brunch\')" class="but">Brunch Spot</div></a></li> </ul> </div> </div> </li>')
+		$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"><h2>☕️</h2> </div> <div class="wet-text"> <h2>Good Morning!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Cafe\')" class="but">Coffee</div></a></li> <li><a><div onclick="getRest(\'Pancakes\')" class="but">Pancakes</div></a></li> <li><a><div onclick="getRest(\'Breakfast\')" class="but">Breakfast Spot</div></a></li> <li><a><div onclick="getRest(\'Brunch\')" class="but">Brunch Spot</div></a></li> </ul> </div> </div> </li>')
 		$('.hero-img').css('background-image','url(../sunrise.jpg)');
+    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1422347658041-f606c646574c)');
 	}else if (n >= 11 && n <= 12){
 		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../day.jpg)');
+    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1420131751440-4380101bca0d)');
 	}else if (n >= 13 && n <= 17){
 		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../day.jpg)');
+    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1420131751440-4380101bca0d)');
 	}else{
 		$('.smart-start').empty();
-		$('.hero-img').css('background-image','url(../night.jpg)');
+		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
 	}
 }
 
@@ -151,8 +152,8 @@ function getNearby(position) {
 		navigator.geolocation.getCurrentPosition(function(location) {
 
 
-		  var lat = Number(location.coords.latitude).toFixed(2); 
-		  var long =  Number(location.coords.longitude).toFixed(2); 
+		  var lat = Number(location.coords.latitude).toFixed(2);
+		  var long =  Number(location.coords.longitude).toFixed(2);
 		  localStorage.setItem("lat", lat);
 		  localStorage.setItem("long", long);
 		  localStorage.setItem("quadTime", Date.now());
@@ -163,7 +164,7 @@ function getNearby(position) {
 		socket.emit('getEvent',localStorage.getItem("lat"),localStorage.getItem("long"))
 		socket.emit('getVenue',localStorage.getItem("lat"),localStorage.getItem("long"))
 	}
-	  
+
 }
 
 
@@ -174,11 +175,11 @@ socket.on('displayVenue', function (image,name,type,tip,address,city,vLat,vLong,
 
 socket.on('displayEvent', function (name,lat,long,id,provider,rand,emoji,eventfulUrl,startTime,venueAddress,venueName,cityName,image) {
    $('#event-start').after(' <li onclick="loadMore('+"'"+name+"'"+','+lat+','+long+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+venueAddress+"'"+','+"'"+emoji+"'"+','+"'"+type2Color(rand)+"'"+')" style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
-})         	
+})
 
 socket.on('displayRest', function (name,address,phone,type,lat,long) {
   popupBox(name,name,phone,address,type,lat,long)
- }) 
+ })
 
 function type2Emoji(type) {
 	if(type == "Beach"){
@@ -221,7 +222,7 @@ function type2Color(type) {
 		return "#5BC0EB";
 	}
 	else{
-		var rand = Math.floor(Math.random() * 3) + 1  
+		var rand = Math.floor(Math.random() * 3) + 1
 		if (rand == 1) {
 			return "#03FCBA";
 		} else if (rand == 2) {
@@ -229,7 +230,7 @@ function type2Color(type) {
 		}else if (rand == 3){
 			return "#CBBAED";
 		}
-		
+
 	}
 }
 
@@ -237,11 +238,5 @@ function type2Color(type) {
 window.onload = function () {
  getNearby();
  smartInfo()
- 
+
 }
-
-
-
-
-
-
