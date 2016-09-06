@@ -82,6 +82,7 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
+  n = 7
 	if(n >= 18 && n <= 24){
 		//Dinner Time
 		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
@@ -92,7 +93,8 @@ function smartInfo() {
 		$('.smart-start').empty();
 		$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"><h2>☕️</h2> </div> <div class="wet-text"> <h2>Good Morning!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Cafe\')" class="but">Coffee</div></a></li> <li><a><div onclick="getRest(\'Pancakes\')" class="but">Pancakes</div></a></li> <li><a><div onclick="getRest(\'Breakfast\')" class="but">Breakfast Spot</div></a></li> <li><a><div onclick="getRest(\'Brunch\')" class="but">Brunch Spot</div></a></li> </ul> </div> </div> </li>')
 		$('.hero-img').css('background-image','url(../sunrise.jpg)');
-    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1422347658041-f606c646574c)');
+    // $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1422347658041-f606c646574c)');
+    $('#world-hero').css('background-image','url(../day.jpg)');
 	}else if (n >= 11 && n <= 12){
 		$('.smart-start').empty();
 		$('.hero-img').css('background-image','url(../day.jpg)');
@@ -131,6 +133,24 @@ function closePop() {
 function getRest(type) {
 	socket.emit('getResturant',localStorage.getItem("lat"),localStorage.getItem("long"),type)
 }
+
+function refresh() {
+  var $elem = $('#refresh');
+  $({deg: 0}).animate({deg: 360}, {
+      duration: 500,
+      step: function(now) {
+          $elem.css({
+              transform: 'rotate(' + now + 'deg)'
+          });
+      }
+  });
+  $('.load').toggle()
+  localStorage.removeItem('lat')
+  localStorage.removeItem('long')
+  $( ".event-card" ).remove();
+  $( ".food-card" ).remove();
+  getNearby();
+}
 /*
 
 End Main Functions
@@ -146,7 +166,6 @@ Start Nearby Places
 
 
 function getNearby(position) {
-	console.log("ok")
 	//Get geo location
 	if(localStorage.getItem("lat") == undefined){
 		navigator.geolocation.getCurrentPosition(function(location) {
@@ -174,6 +193,7 @@ socket.on('displayVenue', function (image,name,type,tip,address,city,vLat,vLong,
 
 
 socket.on('displayEvent', function (name,lat,long,id,provider,rand,emoji,eventfulUrl,startTime,venueAddress,venueName,cityName,image) {
+  $('.load').hide()
    $('#event-start').after(' <li onclick="loadMore('+"'"+name+"'"+','+lat+','+long+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+venueAddress+"'"+','+"'"+emoji+"'"+','+"'"+type2Color(rand)+"'"+')" style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
 })
 
@@ -236,6 +256,7 @@ function type2Color(type) {
 
 //Call Function on load
 window.onload = function () {
+  $('.load').toggle()
  getNearby();
  smartInfo()
 

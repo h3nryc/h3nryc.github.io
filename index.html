@@ -29,7 +29,11 @@
            <!-- You tab -->
             <div id="you" class="swiper-slide ">
               <div class="hero-img">
-              <h2 class="logo">unum | you</h2>
+                <div class="navcontl">
+                  <i class="material-icons">settings</i>
+                  <i onclick="refresh();" id="refresh" style="float: right; color: grey;"class="material-icons">refresh</i>
+                </div>
+              <h2 id="you-logo" class="logo">unum | you</h2>
               </div>
               <div class="main-list">
               <!-- You list -->
@@ -50,6 +54,9 @@
                   <div id="smart-start"></div>
                   <div id="venue-start"></div>
                   <div id="event-start"></div>
+                  <div style="float: left; display: none;position: relative;left: 45%;" class="load">
+                    <div class="loading"></div>
+                  </div>
                   </ul>
                 </ul>
               </div>
