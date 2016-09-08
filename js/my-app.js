@@ -14,6 +14,12 @@ var scoll = 0;
     pagination:'.swiper-pagination'
   });
 
+if (localStorage.getItem("woid") === null) {
+  console.log("hi")
+  $('head').append("    <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"sydney\")&format=json&callback=callbackFunction1'></script>")
+ }else{
+  $('head').append("   <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\""+""+localStorage.getItem("woid")+""+"\")&format=json&callback=callbackFunction1'></script>")
+}
 
 function more() {
 	if ($(".wet-card").height() == 350) {
@@ -82,7 +88,6 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
-  n = 7
 	if(n >= 18 && n <= 24){
 		//Dinner Time
 		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
@@ -150,6 +155,17 @@ function refresh() {
   $( ".event-card" ).remove();
   $( ".food-card" ).remove();
   getNearby();
+}
+
+function setSave() {
+
+  var woid = $('.set-loc-input').val()
+  localStorage.setItem("woid",woid)
+
+}
+
+function setInput() {
+  $('.set-loc-input').val(localStorage.getItem("woid"))
 }
 /*
 

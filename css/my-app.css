@@ -492,3 +492,41 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
   -webkit-animation-delay: 500ms;
           animation-delay: 500ms;
 }
+
+#set-close{
+  background-color: #311B92;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  padding: 10px 10px 10px 10px;
+  float: right;
+}
+
+#set-close p{
+  margin: 0;
+}
+
+.set-wet h2{
+  margin: 0;
+  margin-top: 30px;
+}
+
+.set-wet input{
+  border: 0;
+  border-bottom: 1px solid #311B92;
+  font-size: 14pt;
+  margin-top: 5px;
+}
+
+.set-gend{
+  margin-top: 12px;
+}
+.set-gend h2{
+  margin: 0;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.set-gend-emoji{
+  font-size: 30pt;
+}

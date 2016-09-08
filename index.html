@@ -14,9 +14,28 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <script src="js/weather.js"></script>
-    <script src='https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="sydney")&format=json&callback=callbackFunction1'></script>
   </head>
   <body onclick="closePop()">
+    <div class="popup popup-about">
+      <div class="content-block">
+        <div class="set-head">
+          <a href="#" class="close-popup" ><div id="set-close" onclick="setSave();"class="but"><p>Close</p></div></a>
+        </div>
+
+        <h1>Settings.</h1>
+        <div class="settings">
+          <div class="set-wet">
+              <h2>Where are you? 🏖</h2><input class="set-loc-input" type="text" name="name" placeholder="Sydney">
+          </div>
+          <div class="set-gend">
+              <h2>Are you a boy or a girl?</h2>
+              <br>
+              <h2 class="set-gend-emoji">👦</h2><h2 class="set-gend-emoji" style="margin-left: 12px;">👧</h2>
+          </div>
+          <h3>All changes are saved automatically</h3>
+        </div>
+      </div>
+    </div>
     <div class="page-content pull-to-refresh-content" data-ptr-distance="55">
       <div class="pull-to-refresh-layer">
       <div class="preloader"></div>
@@ -30,7 +49,7 @@
             <div id="you" class="swiper-slide ">
               <div class="hero-img">
                 <div class="navcontl">
-                  <i class="material-icons">settings</i>
+                  <i data-popup=".popup-about" onclick="setInput();"class="material-icons open-popup">settings</i>
                   <i onclick="refresh();" id="refresh" style="float: right; color: grey;"class="material-icons">refresh</i>
                 </div>
               <h2 id="you-logo" class="logo">unum | you</h2>
@@ -71,7 +90,7 @@
           <div class="swiper-pagination"></div>
         </div>
     </div>
-    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="lib/socket.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
