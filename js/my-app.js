@@ -6,12 +6,13 @@
 
 */
 var myApp = new Framework7();
-var socket = io.connect('https://unum-back.herokuapp.com/');
+var socket = io.connect('http://localhost:3000/');
 var $$ = Dom7;
 var scoll = 0;
   // Init slider and store its instance in mySwiper variable
   var mySwiper = myApp.swiper('.swiper-container', {
-    pagination:'.swiper-pagination'
+    pagination:'.swiper-pagination',
+    paginationClickable: true
   });
 
 if (localStorage.getItem("woid") === null) {
@@ -203,77 +204,25 @@ function getNearby(position) {
 }
 
 
-socket.on('displayVenue', function (image,name,type,tip,address,city,vLat,vLong,verified,id,provider) {
-	$( "#venue-start" ).slideDown().after( ' <li onclick="loadMore('+"'"+type+"'"+','+vLat+','+vLong+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+address+"'"+','+"'"+type2Emoji(type)+"'"+','+"'"+type2Emoji(type)+"'"+')" style="background-color: '+type2Color(type)+';"class="food-card"> <div class="food-head"> <h2>'+type2Emoji(type)+'  '+type+' - '+tip+' tips</h2> </div> <div style="background-image: url('+image+');" class="food-hero"></div> <div class="food-footer"> <h2>'+name+'</h2> <p style="margin: 0;">This '+type+' is located on '+address+' '+city+'</p> </div> </li>' );
+socket.on('displayVenue', function (venue) {
+	$( "#venue-start" ).slideDown().after(venue);
 })
 
 
-socket.on('displayEvent', function (name,lat,long,id,provider,rand,emoji,eventfulUrl,startTime,venueAddress,venueName,cityName,image) {
+socket.on('displayEvent', function (eventt) {
   $('.load').hide()
-   $('#event-start').after(' <li onclick="loadMore('+"'"+name+"'"+','+lat+','+long+','+"'"+id+"'"+','+"'"+provider+"'"+','+"'"+name+"'"+','+"'"+venueAddress+"'"+','+"'"+emoji+"'"+','+"'"+type2Color(rand)+"'"+')" style="background-color: '+type2Color(rand)+';" class="event-card"> <div class="event-head"> <h2>🎉 Event - '+name+'</h2> </div> <div style="background-image: url('+image+');" class="event-hero"></div> <div class="event-footer"> <h2>When - '+startTime+'</h2> <p>'+venueName+' / '+venueAddress+'</p> </div> </li>')
+   $('#event-start').after(eventt)
 })
 
 socket.on('displayRest', function (name,address,phone,type,lat,long) {
   popupBox(name,name,phone,address,type,lat,long)
  })
 
-function type2Emoji(type) {
-	if(type == "Beach"){
-		return "🏖";
-	}else if (type == "Park"){
-		return "🌲";
-	}else if (type == "Playground"){
-		return "⛳️";
-	}else if (type == "Food & Drink"){
-		return "🍴";
-	}else if(type == "Preserve"){
-		return "🍀";
-	}else if(type == "Historic Site"){
-		return "👴";
-	}else if (type == "Pool"){
-		return "🌊";
-	}else if (type == "Café"){
-		return "☕️";
-	}
-	else{
-		return "🚶";
-	}
-}
-
-
-function type2Color(type) {
-	if(type == "Beach" || type == 1){
-		return "#f1c40f";
-	}else if (type == "Park" || type == 2){
-		return "#2ecc71";
-	}else if (type == "Playground" || type == 3){
-		return "#e74c3c";
-	}else if (type == "Food & Drink" || type == 4){
-		return "#e67e22";
-	}else if(type == "Preserve"){
-		return "#EF2D56";
-	}else if (type == "Historic Site" || type == "Café" || type == 5){
-		return '#ED7D3A';
-	}else if (type == "Pool" || type == 6){
-		return "#5BC0EB";
-	}
-	else{
-		var rand = Math.floor(Math.random() * 3) + 1
-		if (rand == 1) {
-			return "#03FCBA";
-		} else if (rand == 2) {
-			return "#01FDF6";
-		}else if (rand == 3){
-			return "#CBBAED";
-		}
-
-	}
-}
 
 //Call Function on load
 window.onload = function () {
   $('.load').toggle()
  getNearby();
  smartInfo()
-
+localStorage.setItem("woid", "Sydney")
 }
