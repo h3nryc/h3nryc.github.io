@@ -6,7 +6,7 @@
 
 */
 var myApp = new Framework7();
-var socket = io.connect('http://localhost:3000/');
+var socket = io.connect('https://unum-back.herokuapp.com/');
 var $$ = Dom7;
 var scoll = 0;
   // Init slider and store its instance in mySwiper variable
@@ -73,8 +73,10 @@ function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
 	var uberLink = "https://m.uber.com/ul?client_id=YOUR_CLIENT_ID&action=setPickup&pickup[latitude]="+localStorage.getItem("lat")+"&pickup[longitude]=-"+localStorage.getItem("long")+"&pickup[nickname]=Your Location[formatted_address]=Your Location Rd&dropoff[latitude]="+lat+"&dropoff[longitude]=-"+long+"&dropoff[nickname]="+name+"[formatted_address]="+address+"&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d&link_text=View%20team%20roster&partner_deeplink=Unum"
 	var taxiLink = "https://www.google.com.au/#safe=active&q=book%20a%20taxi"
 	var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
-	$('.main-list').after(' <div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div>');
+  $('.main-list').after(' <div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div>');
   $('.swiper-slide').scrollTop('0');
+
+if (address == undefined) {  console.log(address);$('#loadmore-add').hide()}
   $('.info-card').hide()
 	$('.info-card').animate({width: 'toggle'}, 120);
 }
@@ -89,29 +91,30 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
+    n = 18
+  console.log(n);
 	if(n >= 18 && n <= 24){
 		//Dinner Time
-		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
+		$('.hero-img').css('background-image','url(./night2.jpeg)'); //night 2
 		$('.smart-start').empty();
-    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1463096351051-3cf0a64d4079)');
+    $('#world-hero').css('background-image','url(./trade.jpeg)'); //trade
     $('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"> <h2>🍲</h2> </div> <div class="wet-text"> <h2>Its dinner time!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Chinese\')" class="but">Chinese Food</div></a></li> <li><a><div onclick="getRest(\'Burger\')" class="but">Burger</div></a></li> <li><a><div onclick="getRest(\'Sea&20Food\')" class="but">Seafood</div></a></li> <li><a><div onclick="getRest(\'Thai\')" class="but">Thai</div></a></li> </ul> </div> </div> </li>')
 	}else if(n >= 1 && n <= 10){
 		$('.smart-start').empty();
 		$('#smart-start').append(' <li> <div class="pop-card"> <div id="emoji-left" class="emoji-left"><h2>☕️</h2> </div> <div class="wet-text"> <h2>Good Morning!</h2> <p>Are you hungry?</p> </div> <div class="pop-but"> <ul class="but-list"> <li><a><div onclick="getRest(\'Cafe\')" class="but">Coffee</div></a></li> <li><a><div onclick="getRest(\'Pancakes\')" class="but">Pancakes</div></a></li> <li><a><div onclick="getRest(\'Breakfast\')" class="but">Breakfast Spot</div></a></li> <li><a><div onclick="getRest(\'Brunch\')" class="but">Brunch Spot</div></a></li> </ul> </div> </div> </li>')
-		$('.hero-img').css('background-image','url(../sunrise.jpg)');
-    // $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1422347658041-f606c646574c)');
+		$('.hero-img').css('background-image','url(./sunrise.jpg)');
     $('#world-hero').css('background-image','url(../day.jpg)');
 	}else if (n >= 11 && n <= 12){
 		$('.smart-start').empty();
-		$('.hero-img').css('background-image','url(../day.jpg)');
-    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1420131751440-4380101bca0d)');
+		$('.hero-img').css('background-image','url(./day.jpg)');
+    $('#world-hero').css('background-image','url(../coast.jpeg)');//coast
 	}else if (n >= 13 && n <= 17){
 		$('.smart-start').empty();
-		$('.hero-img').css('background-image','url(../day.jpg)');
-    $('#world-hero').css('background-image','url(https://hd.unsplash.com/photo-1420131751440-4380101bca0d)');
+		$('.hero-img').css('background-image','url(./day.jpg)');
+    $('#world-hero').css('background-image','url(../coast.jpeg)');//coast
 	}else{
 		$('.smart-start').empty();
-		$('.hero-img').css('background-image','url(https://images.unsplash.com/photo-1473042904451-00171c69419d)');
+		$('.hero-img').css('background-image','url(./night2)'); //night 2
 	}
 }
 

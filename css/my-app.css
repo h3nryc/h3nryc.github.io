@@ -132,7 +132,8 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 
 .food-card{
 	display: inline-block;
-	min-height: 400px;
+	min-height: 390px;
+  max-height: 400px;
 	width: 95%;
 	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
@@ -174,7 +175,7 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 
 .event-card{
 	display: inline-block;
-	height: 440px;
+	height: 400px;
 	width: 95%;
 	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
@@ -529,4 +530,19 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 
 .set-gend-emoji{
   font-size: 30pt;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: none;
+  border:1px solid #aaa;
+  border-radius: 10px;
+  opacity:1;
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+  background: #311B92;
+  border-color: #311B92;
 }
