@@ -6,7 +6,7 @@
 
 */
 var myApp = new Framework7();
-var socket = io.connect('https://unum-back.herokuapp.com/');
+var socket = io.connect('http://localhost:3000/');
 var $$ = Dom7;
 var scoll = 0;
   // Init slider and store its instance in mySwiper variable
@@ -211,6 +211,9 @@ socket.on('displayVenue', function (venue) {
 	$( "#venue-start" ).slideDown().after(venue);
 })
 
+socket.on('displayNews', function (article) {
+	$( "#world-list" ).slideDown().append(article);
+})
 
 socket.on('displayEvent', function (eventt) {
   $('.load').hide()
@@ -227,5 +230,5 @@ window.onload = function () {
   $('.load').toggle()
  getNearby();
  smartInfo()
-localStorage.setItem("woid", "Sydney")
+ socket.emit('getNews')
 }

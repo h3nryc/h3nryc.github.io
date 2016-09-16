@@ -546,3 +546,19 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
   background: #311B92;
   border-color: #311B92;
 }
+
+.news-card{
+	display: inline-block;
+	min-height: 400px;
+  max-height: 650px;
+	width: 95%;
+  padding-bottom: 12px;
+	-webkit-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+	box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
+}
+
+.news-card h3 {
+  margin: 0;
+  margin-bottom: 5px;
+}
