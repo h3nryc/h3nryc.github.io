@@ -224,7 +224,6 @@ socket.on('displayRest', function (name,address,phone,type,lat,long) {
   popupBox(name,name,phone,address,type,lat,long)
  })
 
-
 //Call Function on load
 window.onload = function () {
   $('.load').toggle()
@@ -232,3 +231,35 @@ window.onload = function () {
  smartInfo()
  socket.emit('getNews')
 }
+  $(function(){
+  $('#header').data('size','big');
+});
+
+$('#you').scroll(function(){
+  if($('#you').scrollTop() > 0)
+{
+    if($('#header').data('size') == 'big')
+    {
+        $('#header').data('size','small');
+        $('#header').stop().animate({
+            height:'50px'
+        },600);
+        $('#you-logo').stop().animate({
+            fontSize:'10pt', top:'0px', display: 'none'
+        },600);
+    }
+}
+else
+  {
+    if($('#header').data('size') == 'small')
+      {
+        $('#header').data('size','big');
+        $('#header').stop().animate({
+            height:'250px'
+        },600);
+        $('#you-logo').stop().animate({
+            fontSize:'30pt', top:'70px', display: 'block'
+        },600);
+      }
+  }
+});
