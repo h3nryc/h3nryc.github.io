@@ -235,7 +235,7 @@ window.onload = function () {
   $('#header').data('size','big');
 });
 
-$('#you').scroll(function(){
+/*$('#you').scroll(function(){
   if($('#you').scrollTop() > 0)
 {
     if($('#header').data('size') == 'big')
@@ -262,4 +262,4 @@ else
         },600);
       }
   }
-});
+});*/
