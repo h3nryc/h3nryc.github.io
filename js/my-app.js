@@ -125,7 +125,7 @@ function navLink(link) {
 function popupBox(head,body,number,address,type,lat,long) {
 
 if (address == null){address = "We could not find an adress but here is the venue on a map"}else{address = "This venue is located on "+address}
-var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
+var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
 	if(head == "fail"){
 		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>Unable to find near restarunts!</h2> </div> <hr> <div class="popup-body"> <p> There are no restarunts nearby!</p> </div> <div class="popup-number"> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
 	}else{
