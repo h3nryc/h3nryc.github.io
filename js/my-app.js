@@ -91,7 +91,6 @@ function closePopup() {
 function smartInfo() {
 	var d = new Date();
 	var n = d.getHours();
-    n = 18
   console.log(n);
 	if(n >= 18 && n <= 24){
 		//Dinner Time
