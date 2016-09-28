@@ -73,12 +73,11 @@ function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
 	var uberLink = "https://m.uber.com/ul?client_id=YOUR_CLIENT_ID&action=setPickup&pickup[latitude]="+localStorage.getItem("lat")+"&pickup[longitude]=-"+localStorage.getItem("long")+"&pickup[nickname]=Your Location[formatted_address]=Your Location Rd&dropoff[latitude]="+lat+"&dropoff[longitude]=-"+long+"&dropoff[nickname]="+name+"[formatted_address]="+address+"&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d&link_text=View%20team%20roster&partner_deeplink=Unum"
 	var taxiLink = "https://www.google.com.au/#safe=active&q=book%20a%20taxi"
 	var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
-  $('.main-list').after(' <div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div>');
-  $('.swiper-slide').scrollTop('0');
-
+  // $('.main-list').after(' <div class="popup"><div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div></div>');
+  // $('.swiper-slide').scrollTop('0');
+  var popupHTML = ' <div class="popup"><div style="background-color: '+color+'" class="info-card fullscreen"> <div class="info-head close-popup"> <i class="material-icons close-popup">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div></div>'
+  myApp.popup(popupHTML);
 if (address == undefined) {  console.log(address);$('#loadmore-add').hide()}
-  $('.info-card').hide()
-	$('.info-card').animate({width: 'toggle'}, 120);
 }
 
 function closePopup() {
@@ -124,7 +123,7 @@ function navLink(link) {
 function popupBox(head,body,number,address,type,lat,long) {
 
 if (address == null){address = "We could not find an adress but here is the venue on a map"}else{address = "This venue is located on "+address}
-var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
+var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
 	if(head == "fail"){
 		$('.main-list').append('<div style="background-color: #42A5F5;" class="popup-rest"> <div class="popup-head" > <h2>Unable to find near restarunts!</h2> </div> <hr> <div class="popup-body"> <p> There are no restarunts nearby!</p> </div> <div class="popup-number"> <br><p>Close ❌</p></div> </div>').toggle().slideDown();
 	}else{
@@ -170,6 +169,8 @@ function setSave() {
 function setInput() {
   $('.set-loc-input').val(localStorage.getItem("woid"))
 }
+
+
 /*
 
 End Main Functions
@@ -223,6 +224,7 @@ socket.on('displayRest', function (name,address,phone,type,lat,long) {
   popupBox(name,name,phone,address,type,lat,long)
  })
 
+
 //Call Function on load
 window.onload = function () {
   $('.load').toggle()
@@ -230,35 +232,3 @@ window.onload = function () {
  smartInfo()
  socket.emit('getNews')
 }
-  $(function(){
-  $('#header').data('size','big');
-});
-
-/*$('#you').scroll(function(){
-  if($('#you').scrollTop() > 0)
-{
-    if($('#header').data('size') == 'big')
-    {
-        $('#header').data('size','small');
-        $('#header').stop().animate({
-            height:'50px'
-        },600);
-        $('#you-logo').stop().animate({
-            fontSize:'10pt', top:'0px', display: 'none'
-        },600);
-    }
-}
-else
-  {
-    if($('#header').data('size') == 'small')
-      {
-        $('#header').data('size','big');
-        $('#header').stop().animate({
-            height:'250px'
-        },600);
-        $('#you-logo').stop().animate({
-            fontSize:'30pt', top:'70px', display: 'block'
-        },600);
-      }
-  }
-});*/
