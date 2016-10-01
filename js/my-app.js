@@ -64,7 +64,7 @@ function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
 
-function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
+function loadMore(type,lat,long,id,provider,name,address,emoji,color,phone) {
   scoll = $('.swiper-slide').scrollTop();
 	var distance = getDistance(lat,long,localStorage.getItem("lat"),localStorage.getItem("long"));
 	var time = distance * 0.50;
@@ -72,12 +72,17 @@ function loadMore(type,lat,long,id,provider,name,address,emoji,color) {
 	var taxiFare = Number(distance * 2.86 + 5).toFixed(2);
 	var uberLink = "https://m.uber.com/ul?client_id=YOUR_CLIENT_ID&action=setPickup&pickup[latitude]="+localStorage.getItem("lat")+"&pickup[longitude]=-"+localStorage.getItem("long")+"&pickup[nickname]=Your Location[formatted_address]=Your Location Rd&dropoff[latitude]="+lat+"&dropoff[longitude]=-"+long+"&dropoff[nickname]="+name+"[formatted_address]="+address+"&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d&link_text=View%20team%20roster&partner_deeplink=Unum"
 	var taxiLink = "https://www.google.com.au/#safe=active&q=book%20a%20taxi"
-	var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
+  var viewUrl = "http://maps.googleapis.com/maps/api/streetview?size=600x300&location="+lat+","+long+"&heading=151.78&pitch=-0.76"
+  var mapUrl = "http://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long+"&zoom=18&size=500x400&sensor=false"
   // $('.main-list').after(' <div class="popup"><div style="background-color: '+color+'" class="info-card fullscreen"> <div onclick="closePopup();" class="info-head"> <i class="material-icons">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div></div>');
   // $('.swiper-slide').scrollTop('0');
-  var popupHTML = ' <div class="popup"><div style="background-color: '+color+'" class="info-card fullscreen"> <div class="info-head close-popup"> <i class="material-icons close-popup">arrow_back</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div class="info-map" style="background-image: url('+mapUrl+');"></div> <div class="info-footer"> <p id="loadmore-add"style="margin: 0;">'+name+' is located on <span style="font-weight: bold;">'+address+'</span></p> <h2 style="margin: 0;">In a taxi it would cost around <span style="font-weight: bold;">'+taxiFare+'</span> or an Uber would cost <span style="font-weight: bold;">'+uberFare+'</span> 🚕</h2> <div class="info-butt"> <div class="info-book">Book a</div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <p>Infomation provided by '+provider+' ✌️</p> </div> </div></div>'
+  var popupHTML = ' <div class="popup"><div style="background-color: '+color+'" class="info-card fullscreen"> <div class="info-head close-popup"> <i class="material-icons close-popup">keyboard_arrow_down</i><h2 class="info-title">'+emoji+'   '+name+'</h2> </div> <div style="height: 250px;" class="swiper-container info-slide"> <div class="swiper-wrapper"> <div class="swiper-slide"><div class="info-map" style="background-image: url('+mapUrl+');"></div></div> <div class="swiper-slide"><img src="'+viewUrl+'" ></div> </div> <div class="swiper-pagination"></div> </div> <div class="info-footer"><ul class="loadmore-list"><li id="loc-li"class="loadmore-li"><i class="material-icons">location_on</i><p>'+address+'</p></li><li class="loadmore-li"><i class="material-icons">local_taxi</i><p>In a taxi it would cost $'+taxiFare+'</p></li><li class="loadmore-li"><i class="material-icons">near_me</i><p>In a Uber it would cost $'+uberFare+'</p></li><li class="loadmore-li"><i class="material-icons">directions_walk</i><p>'+name+' is '+distance+' km away</p></li></ul> <div class="info-butt"> <div style="color: black;"class="info-book">Take an </div><a onclick="navLink('+"'"+uberLink+"'"+')" href="'+uberLink+'"><div class="uber">Uber</div></a><a onclick="navLink('+"'"+taxiLink+"'"+')"href="'+taxiLink+'>"<div class="taxi">Taxi</div></a> </div> <style="margin-left: 30px;"p>Infomation provided by '+provider+' ✌️</p> </div> </div></div>'
   myApp.popup(popupHTML);
-if (address == undefined) {  console.log(address);$('#loadmore-add').hide()}
+if (address == undefined) {  console.log(address);$('#loc-li').hide()}
+var infoSlide = myApp.swiper('.info-slide', {
+  pagination:'.swiper-pagination',
+  paginationClickable: true
+});
 }
 
 function closePopup() {
@@ -169,7 +174,6 @@ function setSave() {
 function setInput() {
   $('.set-loc-input').val(localStorage.getItem("woid"))
 }
-
 
 /*
 

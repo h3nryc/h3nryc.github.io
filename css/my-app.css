@@ -254,10 +254,10 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 }
 
 .info-card {
-	background-color: steelblue;
+	background-color: white;
 	text-align: left;
 	margin: 0;
-	color: white;
+	color: black;
 }
 
 .info-head{
@@ -265,8 +265,9 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	height: 40px;
 	padding-top: 12px;
 	padding-left: 5px;
-	background-color: #6B94B5;
-	border-bottom: 1px #508aba solid;
+	background-color white;
+  color: black;
+  font-weight: light;
 }
 
 .info-title{
@@ -287,6 +288,25 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
 	background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+.loadmore-list{
+  list-style: none;
+  padding-left: 5%;
+}
+
+.loadmore-list li {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.loadmore-li p {
+  margin: 0;
+  display: inline;
+  padding-left: 5px;
+  position: relative;
+  bottom: 5px;
+  font-size: 12pt;
 }
 
 .info-footer{
