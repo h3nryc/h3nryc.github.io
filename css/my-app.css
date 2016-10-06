@@ -582,3 +582,28 @@ box-shadow: -1px 2px 14px -4px rgba(0,0,0,0.75);
   margin: 0;
   margin-bottom: 5px;
 }
+.boy {
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    display: inline-block;
+    width:56px;
+    border-color: white;
+    text-align: center;
+}
+.girl {
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  display: inline-block;
+  width:56px;
+  border-color: white;
+  margin-left: 12px;
+  text-align: center;
+}
+.boy:hover {
+    background-color: #311B92;
+}
+.girl:hover {
+  background-color: #311B92;
+}
