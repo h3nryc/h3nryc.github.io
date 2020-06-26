@@ -1,127 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
-    <meta name="apple-mobile-web-app-status-bar-style" content="#EF2021">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Unum</title>
-    <link rel="stylesheet" href="css/framework7.ios.css">
-    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
-    <link rel="stylesheet" href="css/my-app.css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <script src="js/weather.js"></script>
+    <title>Task 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body onclick="closePop()">
-    <div class="popup popup-about">
-      <div class="content-block">
-        <div class="set-head">
-          <a href="#" class="close-popup" ><div id="set-close" onclick="setSave();"class="but"><p>Close</p></div></a>
+  <body>
+      <a href="./part1.html">
+        <div class="task-1">
+          <p class="start-p">Part 1</p>
+          <p class="desc">Questions from the task answered.</p>
         </div>
-
-        <h1>Settings.</h1>
-        <div class="settings">
-          <div class="set-wet">
-              <h2>Where are you? 🏖</h2><input class="set-loc-input" type="text" name="name" placeholder="Sydney">
-          </div>
-          <div class="set-gend">
-              <h2>Are you a boy or a girl?</h2>
-              <br>
-              <div class="boy"><h2 class="set-gend-emoji">👦</h2></div><div class="girl"><h2 class="set-gend-emoji">👧</h2></div>
-          </div>
-          <h3>All changes are saved automatically</h3>
-          <h4>Made with <3 my the unum team</h4>
-        </div>
+      </a>
+    <a href="./part2.html">
+      <div class="task-2">
+        <p class="start-p">Part 2</p>
+        <p class="desc">Examination style questions and answers on the topic of Multimedia Systems.</p>
       </div>
-    </div>
-    <div class="popup popup-login">
-      <div class="content-block">
-        <div class="set-head">
-          <!--<a href="#" class="close-popup" ><div id="set-close" onclick="setSave();"class="but"><p>Close</p></div></a>-->
-        </div>
-
-        <h1>Login</h1>
-        <div class="login">
-          <div class="set-login">
-              <h2>Username:</h2><input class="set-loc-input" type="text" name="name" placeholder="eg. johnsmith99">
-              <h2>Password:</h2><input class="set-loc-input" type="password" name="name" placeholder="">
-          </div>
-          <a href="#" class="close-popup" ><div id="set-close" onclick="setLogin();" class="but"><p>Close</p></div></a>
-        </div>
-      </div>
-    </div>
-    <div class="page-content pull-to-refresh-content" data-ptr-distance="55">
-      <div class="pull-to-refresh-layer">
-      <div class="preloader"></div>
-      <div class="pull-to-refresh-arrow"></div>
-    </div>
-    <!-- Default pull to refresh layer-->
-        <!-- Slider Main -->
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-           <!-- You tab -->
-            <div id="you" class="swiper-slide ">
-              <div id="header" class="hero-img">
-                <div class="navcontl">
-                  <i data-popup=".popup-about" onclick="setInput();"class="material-icons open-popup">settings</i>
-                  <i onclick="refresh();" id="refresh" style="float: right; color: #311B92;"class="material-icons">refresh</i>
-                </div>
-              <h2 id="you-logo" class="logo">unum | you</h2>
-              </div>
-              <div class="main-list">
-              <!-- You list -->
-                <ul class="you-list">
-                  <li onclick="more();" class="wet-card">
-                    <div id='emoji-left' class="emoji-left">
-                      <h2>👋</h2>
-                    </div>
-                    <div class="wet-text">
-                      <h2><div style='display: inline;' id='onewordweather'></div>&nbsp<div style='display: inline;' id='temp'></div></h2>
-                      <p>Have a nice day!</p>
-                      <h1 id="demo"></h1>
-                    </div>
-                    <div id='wet-hidden' class="wet-hidden">
-                      <ul id="wet-list"></ul>
-                    </div>
-                  </li>
-                  <div id="smart-start"></div>
-                  <div id="venue-start"></div>
-                  <div id="event-start"></div>
-                  <div style="float: left; display: none;position: relative;left: 45%;" class="load">
-                    <div class="loading"></div>
-                  </div>
-                  </ul>
-                </ul>
-              </div>
-            </div>
-            <!-- World tab -->
-            <div id="world" class="swiper-slide">
-              <div id="world-hero" class="hero-img">
-              <h2 class="logo">unum | world 🌎</h2>
-              </div>
-              <ul id="world-list" class="you-list">
-              </ul>
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-    </div>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-84671548-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-    <script type="text/javascript" src="lib/socket.js"></script>
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <script type="text/javascript" src="lib/jquery.min.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
+    </a>
+      <script src="logic.js" charset="utf-8"></script>
   </body>
 </html>

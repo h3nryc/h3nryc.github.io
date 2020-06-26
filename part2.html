@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Part 1</title>
+  </head>
+  <body>
+<div style="width 100%; height: 60px;">
+
+</div>
+    <div class="nav-bar red"><a href="index.html"><p class="menu">Menu</p></a><p class="middle">Part 2</p></div>
+    <h1 onclick="nextQ();" class="next two-buts"> → </h1>
+    <h1 onclick="prevQ();" class="prev two-buts"> ← </h1>
+      <div class="questions">
+        <div class="q1">
+          <h1>Question 1 <span onclick="password(1);" class="answerBox">Show Answer</span></h1>
+                      <p class="q">Describe two differences between multimedia systems and traditional print media. (2 Marks)
+            </p>
+          <img class="q-img" src="https://www.apacciooutlook.com/newstransfer/upload/hv9am450x308_Vs47.jpg" alt="">
+        </div>
+        <div class="q2">
+          <h1>Question 2 <span onclick="password(2);" class="answerBox">Show Answer</span></h1>
+                      <p class="q">What is one difference between primary and secondary storage and name an example for each. (2 Marks)
+            </p>
+
+        </div>
+        <div class="q3">
+          <h1>Question 3 <span onclick="password(3);" class="answerBox">Show Answer</span></h1>
+                      <p class="q">Frank wishes to make a multimedia system, in the form of a website, for his school. The website will consist of videos made by other students, students sporting statistics and music suggestions. Name at least two issues that may affect the development of this website. (3 Marks)
+            </p>
+        <img class="q-img" src="https://cf.ltkcdn.net/kids/images/std/236795-1600x1067-kid-coding.jpg" alt="">
+
+        </div>
+        <div class="q4">
+          <h1>Question 4 <span onclick="password(4);" class="answerBox">Show Answer</span></h1>
+                      <p class="q">Below is a screenshot of the home page of Frank’s website. The homepage consists of three links taking the user to a page either displaying videos, student sports statistics or music recommendations. Down the bottom of the page is a button taking the user to another webpage where they chose if they are uploading a video or a sporting stat. Using this information and any information that can be derived from the screenshot, construct a suitable storyboard/site map for the website. (4 Marks)
+            </p>
+      <img class="q-img" src="./img/q2.png" alt="">
+
+        </div>
+        <div class="q5">
+          <h1>Question 5 <span onclick="password(5);" class="answerBox">Show Answer</span></h1>
+                      <p class="q">Audio is often digitised enabling it to be used in multimedia systems. Describe the digitalisation of audio with direct reference to sampling size and sampling rate. (5 Marks)
+            </p>
+        <img class="q-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb8AAABxCAMAAAByWF0wAAAAkFBMVEX////6//8AAAD8///6+vr8/Pz1+vqioqL09PT39/fY2Njk5OSoqKjw8PDAwMCsrKyXmZnW1tbGxsZtbW3e3t7n5+d8fHxXV1eysrJgYGCHh4eUlJQqKipoaGjQ0NDBwcEoKCg6OjoUFBRQUFAyMjJ3d3dJSUkfHx+Dg4NAQEA1NTVsbGxTU1MODg5bXFwZGRm7Z5u9AAAX/klEQVR4nO1di2KquhLNTqWAvJ/yUIoIIlb0///uJiCQELTYivb0OvucyiMisFiTmclkAOCHIgTSwFZrsK23sqy1AD6G9yJZ/fRsXnKreBGcs1sHEdJ89Ifnrxzshd/DRY2gij4Ubm5X64qN4cT42Xa1RZg7oKKoB6sGmlKtOnMBtwYi2g3AbG7PZy/8niCqGSD8hCKDFY7iGkK3xg/CBDcwYalv8IKTn79ixGilhCofAT47QtxWghBKL/yeIBkwIAdAUMwEzwRirIkzJ8T4hY5gI12phKIYVvgBMXAU/ClDoASCKEMZaKkoqCbqREUBf+eF38PFqvBzINKC6gdQPTDj9QBtNT20k5+DA27k122dUOfRJg3WW6EGeES6DxUg5s7k4oXf48W1OBMKQMHaD+GHNKkNIeZfVOFn19D5XXtMOlhvwPihzlLF+leQ4OmF38PFg+EuQOqxwc/QXB1wu8v4Ib2qsPjNd7sQg/fC78GiVjblscVvt0WrIonfETdg8Ku2dvi5s7rRC78Hy65CJnRa/FDHppRYf9p6taNCyF7gVhHE/gQXigg/XhWQzdnilyH8lO0Lv0eLUEECbL7Cz1ORW5BlfL7DQEhZ5mLXTrYsueafLVtZliFIIbZXM6/DD7XN+Bd+zxJJbReVo49XMPks38Vb5gsdLOqd8+NqwZ0b8gsbmTIqgj2KUNuVr+r1117yq0RG/3sf/a04iGZ6Q5HTl/wuCSBMTGYrByHMB1q/5NcJL7Pwoa2a7Dz8VF7ykgGZ5Wma5ugpdS7032J4Xjgu0xOy2AzvwpH41zP9BBELXkeCzHFS03DdiujWn3O9bucYF44UviyCnqiOaXs8kG3TUWVTiuY88j1tVUDbeDtCfz5QA40Hmm0qKlo1qgbKTb8h7PBfJajXZrP6U8mqD27W4reohj6dMxln3Hk/d17lXvgxokB4Kk85zMukTE4l+pvDU1KeINp2gvgzgSX+c4JJtVpCtKPc36THhBoeaSVhCCFUPWB/gDWEBhC3ECoNfpncnJWEXWcoesAwAlihGkG4eeHHSFZ4hmFESIxa2qUoUnlZlnm++lv9qwV9BstCuOFHGvyggagVGoYMgZ4DYzW3gYt+KWz1Z3g+aqQB9XMe7SHIDoqhK3iLYajmC7+eWEfjH3gbFvDv37/383/nz3e0VH3yy+UNv0Li56KuzUmAnlagVXELv8UPnGBFwchzIILyA+GnV6QTP9HWufZc/LzdL7OeVOswf/v3DXlTdvGQ03NBSPwgNk12HMIPb0Urymrb4ReZ6ueqxk+pgv849wCBxtkAaBvvIfiFsEyHtIsOD3A3+A07g8OGNeodLpgK9iq5hQFDosRJ4HwLPgSg40L16584C4Of2+CnHI87kn9IOLBi8QPecWEYD+GfA+UAhgM7ID/bZEPfMIuPGIoDO2Y+siK2QwByEJkRPzpN4GzzwPkeelhsH45mYIOfL/X5dx78JPEDQ/iJ+MY9Br850uBBwG7PsM3ms9sB+AyBtDwO7DiWLjfzhp5zZ8dxujuwY7Qop5R//yb7KgZGx3IsA2v/QQywa1BdjlXht6vHU7hjg99Kq84sQPgpGGeZxk99BH7zKhWpYHu6A+ZkOUDAHSaSvR1IEl1WZz3AM2mJ9W3xg4uR0kJ+/z56WMxirAYQC2TGyjFXuXYHmc+Q/XnCXj0w0fbNsrM/A7QOK/vThjIPO/2JzWD4gP7PzqshOhgxe3zstm4SVrPCPf5bDPSAOQ4jmexdEvYn/BTf0AP1hBPlvfoT9lWi7QfUzJDMYJ7npVbHz5Bfp1gcb6CtJQ/KvJQzTM264RZ1GGodP7Ph3oMAA4uDZibqLz686eNna1hFF6w+flxWoaQs2BHYNe7gjJRJuxZWJcZP2TDMVOr+1f0uflEGD9EPwUPyrpXD9thXIoTc142QqI8frk5hZXqaRW+7Aush2pDp5/T6HhQMfnbuY6PGhMxTrsDqMbTTcbeBkUXi3wE+BOCuHDLUroppcMAdMtZ64jmcMJLedxQnjWv8YC+C/gErM9LZMBaMV+v+Q/8bYLaiGhCyhVU3MB/Q0iOEy06uBO6B35sSXPCIrghvjWNVYP3IPvue8Ke6G2M6rU19y0HI4CfXpxnB/hi8UaviAfw2p+pgdrL4zjl+lu4P/AYaQORFPJ4kE4p+ZpHZNzS3ZzcuZGi2Oj/BjJ9gbGv1qPXxU7bLGr/l4ZYoZC2cn+o/tlxaAXP/pkjob5cGnijp4bfW6k8n6eNnnU1iLe7tiBpAlz2j2VlX6aBg5uaXxjkvirrKZeFu8P3DXsR2dutJ/F5pHPcot2jbojgPjYjLnp+glefO3Fz3jtUOQvcDHWLTgegMmb8SDW68H7p9fVHXf4eBTmN2Kv6RCnsZ8dm8tBOXAnaW5o17sOoNOrfuQdgzU+TmV3So3XZ+HtyY90Xv39v7bmnfdha/WNxGl7i9Cbbrxj2IaD9hFifN4rFHptY938T0Dr414JY38W9WJJZ5F8OTlHe97yv9d0XYNORyN1SkYJ43sEmQIuasbC1Vv+ent/gFPRtdb1FLs1v6Hg9a0j27vgY/WvE7mqbJMvpP1qo/+FNjYvBzTdbO+7rGrDvr8LhBdaD2gN9ymsbJArb4pZQ2nO1b2rk0fl3ntup5ta1DEe3pHTiRvpZ+Z3pVvFMwAXwMfsDKc1Xf6pmHPrPAD9Q8ZisA8DBcebnnpfEqUKEaZHGuDsQCTDlOP/l0qbqZu1OXKW9pUzoswWeztCspo0PaN6kddo9/sAV21etG2vB0BGljVm+PsHTHR2A0qCsTwMfgh6fZKARHTPRYDuGnNerFPJs/84ExtKh5vJu7qYLVhPgtWtBcGj89aSwNLuvh1ypDn37+vLS5aAa/VjXHo8NXzmfM39VvIPCLKc9VZMfIZkP4yf1NxoAyMZmoYjQ2aP4d6WIoHh1O4Tfd4oHcQVzayqKev6C1gKKSMoaIHtQNRvLPgYV3P6+9hx/Nv4HxknH4DfOP2TQl/zadJySTD6Vy6CJdOt3/EvjRV7lrdbH4+UnuAG7LPweOS8QM1lv1zm4fgd+SelS/z7+h/o/hn7GeDj+X0HP04NxF/unEpdEuv9KCJm0p/pGg7UYZY255nE+E3uP550+Hn0TcZwo/5Ujwj45Td5em0VfpdqQLLulPCdLMvHBaxacxje6s8VtSD5FwYE5gJP8GgDFZTk6nPzmXiDTT/OtUHuAp/RJ2l6bQ/Nt1p75bk9dPepDBCP45ifvdNLNx+NHujR0zZzCWf6wza26ZTdPxjxppDUiakbdcp0+pu7TeVRK6eEfZn4T+dODXI0jSPpwSPjb+wg7b/QA/NsdtOv5FkCCQsSH2kPgJFP+yssMvocjkduZ0kJOXQeoZnVVWtIif23Aiw7PFj04DmLPTTkfil7PGtLlhNk3Hv4DsbKNL/OOpx/WYdF473VkTnAsoZbwhD8bqF0o0uJ7KbyDwo5X4d/lnDIy3myxY0/EPxsRKRPOvcyxo/h27S+O2VDTa7UzngMq0NAn8tOv4eUkxmd/Q4Ufbn3ft/x5qf1KnFJE/YxMR6GhNPq4+cWkhmRhiQptYJvELF52drQwmBDfCw1U0Lfkq/JZUJyWwXfI97c/5dP4fNRpnkJ0hNeiwIS/XJ+0Xcpw9gpecEZegKd8f9KVP6HiXNLOv8Psj8RebSgeLyGieTf7mnjxzn+j/PiAx5mTH3YqarIiHITx01ylc4V+0Ql7LI/CL6fgLOxPgnvGXyeKfUkHhd5l/KnlOpP2iUgR0iWvmSc0a+h1+l/knBTBTpkeP5d+3/fcn888uqGQGCj+KfybJTJ/Cj4xmZgQZ51viYLstkW/iXwiASqdYnmS4aAA/evxhNm38czL8JNqNpfHLiBWNPCe/JPEjL9Ml2GyQYTL+k7DTjsO5J3a65m8xPEEFdf3dasNbu/Q1fuz4X0/+E/5Db56QXZL4lQRlqHGuI4Uf6cCS44SUaW2R+V6rwQEkqfxivKG3E8h4ZP6d3yHR8b43w0VLowBkxt/Z9Oof+A8Js2ky/OjjCgfibGwytEm9IIDWn+QT6BJmqkC4DECziCNvhzIo7OT4cYvl8mZaAZ5Tu3eDIEB+J55ei5Yyb8xBkP9ApYo43+bfwNw6k0nPl4pp8JultCaj9eeSoIxSEj0bqT/bVOxKiPgZ4hOB34KEbDPwtohV6hs3oIfo5+qbdwTaBhs8DvJPBFdG0DmWOqIHfdf3lA4wSvbejONfzOqSfuoPzh+fiH8WfY40fqSac0gykfxTFqQ1QvJPKYiveGRnyuJnqmlm3+Y3ADc844fwAlIWhXy1eT4mWfRdp59ch00nHMm/gXktJsNJZ8vgJ2jfnIdFCremz5EjtZxdECtKSqBE4jdbkcjsyAsMCP5+kBfAGG1eDAP7JvSQ+swkOWzw+wcC+VA/AG9jDFjEPyr/2mbrKgzgJw/gN5BHGjHKWFww+DnwuPrWTEFHdGzJnpkzxRa2UDJntmOaM8dwbNG04adiKGgfbiD5pmIroina0txRYKqgBqIQmYa4gbYk2ZKooC/NFivOduZO/aWjJkboS2gFtQgV03RsAX3JnK2hghvgL0WKCT0BHdWWUDvcgPtc3pxmBuQASJt3Ar9Fr6zINVsI8a+6HMV28PVyyVD8BUYmJZEL2cyI6iZF5OVEBhsM8C1gmja+Sc5cstFdFFSYlNA37ZvTwOXN/pTGC7jY5gWER7iI9xAuinKfH+DnqdjCAu1bogarBSzyLVrJ02R9POVr1GCxhRBuk8RfLvN0UaAGm/J0jPfJGrXDR/W3cBvjI8RpvD1C3AAe0PfS0wr9yZdLdIRtmeebRbzM96jdOl/AT5jenGINtBAp9Wv4XZN3PSlifDn5Gl8vOlH2RoWQkZRxXA10OfkWEpezgVt2/G+Of6JukKT5YQM38JTH+c8LctCyiok4tU+OLAiQMLh9stJBRkRwbNJydogxNXWZExpEhKSGsYvcWhU3Bj3f7DJfpzD81+LH34ZfzFQPfqwoCDq4d2+ei3VVuBWh86UNGRoK0m6ZMiYzcgR3R55PSDSjHBUFUuEq6YgMNP+2okqokzFVM8z+Ef3fvO7/xuF3NYb+AJEgtD7uPoeGTDqi4mfChujhqd7YIiOolGceEC7WgVQ9CsU/EOSo4fJG90HN/iFLwXpH+AFksng7JfqU8JLMj/If4m/XwbiTcHewPxkJCNVNJ817cbfslwRNIwI/l9LmOjEarJFJ8wqkrDYDQYBsu5U9noFv9lHCMASysp07jmOuJPBPzpRqacT3n8+/aSQggik2aeULi7SD1t+TYw58t8OkovE6MSjqEuNHCD/Kww2rH9VOq/EzVd7mC6wsgay/bwokfuU7yOui2IwyZH8B/yYRslJBj3+X+j+q7E9Auq4kfg45zsFllLuV1Q+NBv3xOWfvNdaK8s/GdT8r5/ENme7GuCjAn+Uf4VJS/BN9IuH8uCXnCRL8i0oScpnwg9wN6S97VLrXGT8g59l4ANuGdd3Pbnkc/H+UfyaJH82/jjIKXTaLmOmeUf2fQ0wH9Uj+iT6Fn9XcyixZsQBOksr0V/kHLtmfQEvaB1Y9XcKPHnnmiUoFKTVO7FEjLN2ciWX57eKet+K3/NX8G6gLOEo8ov+bU76l1lVrFbdU/JLAb0Xhpxw7namSkUPxSOvP7od2SXavMj0tVMP4MWMEDxLHHEjPZuTbNdSIMXOb8t+1uNWmakKFAYlKEwbtPxD8W1L8U0n+kbmXzgmGj8igeF79Ag0Oxer6Mvimdizh9efOI/u/gsIvb8kkbnek72l2Zsqxx7/uAHuq/1uQ/FtQX/Lg7gEA4vj11RsxlUT4PmTEjWXHfze7Cj+Vi2o1p+4IbaonwdUTL7q2c7rL6vSnU1CTbonhrjkFhZR0R+j1f+RwaS9di08mnvtwxu8pReGr95e2LwUBuCRtFaUi60P4RfWm70DdFDyHZ6gXW7t+JyM0nbhcX60mSkwL6OFXtvhxtHYmyk7GFBQzov8rqHAxab84MZ0u4iyOweQMRP3fMwpoNbOwLA5IqA+a7VCPs/5wQrfAtwqHqHjHLPNthR9qgMuO5Agv2RDxaCRUwVd6f9s9ltT4O2m/ePRgJ5HuASko5sTBFuTjzmWE/oyYuunc5+QMRPbnd028n4hzTnbOuOpNtLOs0p8STrQMHbwV6BI4BpX+xKPfslFXH3dCruKfCsIv/J68M6ulhBqiXrS3mQzFIDHjdpHGD6TdwfaUuS6fumWRHef2kp+Wuf4av6f4f0P41VQEqtngt6j7P9zPNfhJ+lj8Fp121Sn/QSou4tdp815h1E03PnKgtLaXEBPoBwq68pCfGr/lhBWRLsoF/LBm8+6DX9yBplL932xzCb/O/vB6UKyJkDeVZu7l3epqqJyPfpp2BuDT+Nf2f6Pxw8bGeP0ZdgySKfyUzmnX6MmqHX4mpP0W4mFY9PjXdYf+YDkf+XRTKvZ/BD9gVncE18iu3sTO6E9uxeCHgdspApSAjPH7wn4JOjOF5p/Q6U+ZDj1d5h9RaZCe8uCdutULqZF6rE6K35Pi1xWArlDjh8mC7ZcTsoV3IgYNF3k/BBXpdhg/dD+THOJRuTmEmw3CD35eHfeVugzQfp3VVWNx8/Swv9SZo72irWl7hICeEu6dWjoKQ+9wATgqU8hT4vek+PUshrDOQuQRIC4e8tacdR2T8SD0lxLQ0Qri3RzdbglhuJJUFWNiqILgAFtVrxaetbsUOY+usyq0+Gk9/NYNTN5F/BzaZST0p3cCw2LDtTrZTEDEvxteRXZPcdSPmvkIFhHDpDoSb3xU7jHaIyF0VMpXvjpZmREbtu1Tmn9iMzdagb3QRRt/yWLaFWiPwO3osyBA6xlD5Knsi3uXTSbw+0XjR9LVgppfFeugxe6Ks5x6+DUmJJfR+DlF05V89vKp2v7PgD3+tRbQzLqIH7CT4v6Vdxv8nuI/DIt9tSDjbXW6nbTBe3akZ5aKy3OfpZQ0fpzfrH/2TuTQaGAb0mfhdX3rtWJM9n470Vz4540fDQg34s0uo0VuUvv6L30QGnD6+rOrFGn1+hSnGfTTe29t01r9yShj+mTgZhoA3/X0GfGz6cXZNpai4NOGqng6X7HUn97WTJo24t4Oq+Gf2UOJWzRWknAVP9E4LSYpQojwu+dD/4uk41/PsJ81SZubpD+C0Rgn/bEspyEm35+l+tm8gMD7ohi2B4/3fnlAjd/fqT9PiXI44ycVfcNVP+tAZi6bdoYpins7pKY2HuxXafCbPNPBqbiECBH0b8jrHY/fL+r/7ipNcTKDGeVv5soXzCS4OjeQy/vzvpuHwUmZRP9mJt3xSzfMjhfRBO9/WD7J/5ta9FN9YQYz1+0yfnBRdZU8s+P80pWASefgYB20GSjVx8gcjsupvg2/X+T/3VXUc36Fx2bZWFW/N1A9yaq6t8EJx9VDoLAFd+vgqnJIxtBAPt44t3oEfn8zfxeJXvOOh0yctKpUoCzYUg12hTUHjf4Op36Dy45NpzLrUvfKOC0GrTunhf5d/oGsfumfyr7ntJpnIkG2Ys0c4tew2EzZDAQgbmxA1kgxYmzaOCxlB8VIbsisH4ffn+Ufx1fWCPNmTVC/U9kZKPglVBNyjwNhIAVDFw29U7Ta6Ix9l9z8zlmFf5h/gMcRrWDonpslBxZDb2/gXAF1mIz5gl8avq+GlgcEl5eMBgrBDEuU3DWz/s/6fwBnmtm9iZiNmHBjldnQ+KF4CJk0skqkvdcfVTqLnGreDW8CNJbBHQtLIv35N+NnAA8OpMd80L3lgrwcrl2GQL8QRJcgvPC+KrFkTaQrss3vmBaK9OcfjZ8h8cKL1Z6Ui0MdFzsy/eJXlJum73PHOwKI/Pen5F//P4uwze+W1/uu758z/+H/Wo5lW6bphwPzCL+r0wheMoUIi6UO7sLAdz194fcESeCdXujYq1/3ksfIhxrL9+gDkf3yd94f/p+SZKndISntL/vvv1u8xVK7B35/N372y0U0Y+/HGvQPx69/vSiH3BtXZfCivL3490RRzPTj/Wci6PmLf88TuczT5XK9TNMY/dunaGW53Kf7ZYy35dW2/XkbWslRg3W83Mf4SzHeEpcTvtD7JV+J4tsr2Ss1K4gCL1i5lsd7uqUXvFd6lmvsvHARWLKm8VawCT13nlloh76yV3WDaOcFsyfX370q/wPyGcdCxJ5xKQAAAABJRU5ErkJggg==" alt="">
+
+        </div>
+
+      </div>
+
+
+
+      <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+  <script src="logic.js" charset="utf-8"></script>
+  </body>
+</html>
